@@ -14,10 +14,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://esntools.app'), // Ajoute cette ligne
   title: "ESN Toolbox — Simulateur de rentabilité",
-  description:
-    "Simulateur de rentabilité ESN : CJM, TJM, marge et gain par jour.",
+  description: "Simulateur de rentabilité ESN : CJM, TJM, marge et gain par jour.",
+  alternates: {
+    canonical: '/', // Et celle-ci
+  },
 };
 
 export default function RootLayout({
