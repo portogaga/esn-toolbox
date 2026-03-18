@@ -2,20 +2,28 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, LineChart } from "lucide-react"; // J'ai ajouté l'icône du logo
 import { Footer } from "./Footer";
 import { Sidebar } from "./Sidebar";
 
 function TopBar({ onMenuClick }: { onMenuClick: () => void }) {
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b border-zinc-800 bg-zinc-950 px-4 md:hidden">
+      
+      {/* Nouveau design : Logo propre au lieu de esntools.app */}
       <Link
         href="/"
-        className="cursor-pointer font-extrabold tracking-tight text-2xl transition-opacity hover:opacity-80"
+        className="flex items-center gap-2 transition-opacity hover:opacity-80"
       >
-        <span className="text-zinc-100">esntools</span>
-        <span className="text-cyan-400">.app</span>
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-emerald-500/20 bg-emerald-500/10 text-emerald-500">
+          <LineChart className="h-5 w-5" />
+        </div>
+        <span className="text-base font-semibold text-zinc-100">
+          ESN Toolbox
+        </span>
       </Link>
+
+      {/* Menu Burger (inchangé) */}
       <button
         type="button"
         onClick={onMenuClick}
@@ -32,7 +40,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen flex-col md:flex-row">
+    <div className="flex min-h-screen flex-col md:flex-row bg-zinc-950">
       <TopBar onMenuClick={() => setMobileMenuOpen(true)} />
       <Sidebar
         mobileOpen={mobileMenuOpen}

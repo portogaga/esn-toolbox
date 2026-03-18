@@ -82,23 +82,15 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        {/* Barre supérieure : logo + devise */}
-        <header className="mb-16 flex flex-wrap items-center justify-between gap-4 border-b border-zinc-800/80 pb-6">
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-emerald-500/40 bg-emerald-500/10">
-              <LineChart className="h-4 w-4 text-emerald-400" />
-            </div>
-            <span className="text-sm font-semibold tracking-tight text-zinc-300">
-              ESN Toolbox
-            </span>
-          </div>
+        {/* Sélecteur de devise */}
+        <div className="mb-8 flex justify-end">
           <div className="inline-flex rounded-full border border-zinc-700/80 bg-zinc-900/80 p-1 text-xs">
             <button
               type="button"
               onClick={() => setCurrency("EUR")}
               className={`rounded-full px-3 py-1.5 transition ${
                 currency === "EUR"
-                  ? "bg-zinc-100 text-zinc-900"
+                  ? "bg-emerald-500 text-zinc-950 shadow"
                   : "text-zinc-400 hover:text-zinc-100"
               }`}
             >
@@ -109,14 +101,14 @@ export default function Home() {
               onClick={() => setCurrency("MAD")}
               className={`rounded-full px-3 py-1.5 transition ${
                 currency === "MAD"
-                  ? "bg-zinc-100 text-zinc-900"
+                  ? "bg-emerald-500 text-zinc-950 shadow"
                   : "text-zinc-400 hover:text-zinc-100"
               }`}
             >
               DH MAD
             </button>
           </div>
-        </header>
+        </div>
 
         {/* Hero */}
         <section className="mb-16 text-center">
