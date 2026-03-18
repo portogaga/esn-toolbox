@@ -4,6 +4,9 @@ from schemas import CJMRequest, SimulateurRequest, BancRequest, LicenciementRequ
 
 app = FastAPI(title="ESN Toolbox API - Moteur BizDev")
 
+@app.get("/")
+def keep_alive():
+    return {"status": "Moteur ESN Toolbox actif"}
 # Crucial pour connecter React plus tard
 app.add_middleware(
     CORSMiddleware,
