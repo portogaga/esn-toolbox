@@ -1,0 +1,17 @@
+# Frontend
+node_modules/
+.next/
+
+# Backend / Python
+venv/
+__pycache__/
+
+# Environment files
+*.env
+*.env.local
+
+# OS / editor junk
+.DS_Store
+.idea/
+.vscode/
+
