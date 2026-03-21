@@ -7,29 +7,21 @@ class CJMRequest(BaseModel):
     pays: Literal["FR", "MA"] = Field(default="MA", description="Code pays: 'FR' ou 'MA'")
 
 class SimulateurRequest(BaseModel):
-    cjm: Optional[float] = None
-    tjm: Optional[float] = None
-    marge_percent: Optional[float] = None
-
-# --- NOUVEAU : Les données pour le calcul du Banc ---
-class BancRequest(BaseModel):
-    cjm: float
-    tjm: float
-    jours_banc: int
-
-
-class SimulateurRequest(BaseModel):
     """Schéma pour le simulateur : exactement 2 valeurs parmi CJM, TJM, Marge."""
     cjm: Optional[float] = Field(None, ge=0, description="Coût journalier moyen (€/jour)")
     tjm: Optional[float] = Field(None, ge=0, description="Taux journalier moyen (€/jour)")
     marge_percent: Optional[float] = Field(None, gt=0, lt=100, description="Marge cible (%)")
 
+# --- NOUVEAU : Les données pour le calcul du Banc ---
+class BancRequest(BaseModel):
+    cjm: float = Field(..., gt=0, description="Coût journalier moyen (€/jour)")
+    tjm: float = Field(..., gt=0, description="Taux journalier moyen (€/jour)")
+    jours_banc: int = Field(..., ge=0, description="Nombre de jours passés sur le banc")
 
-# --- NOUVEAU : Les données pour le calcul de Licenciement (Normes FR) ---
-# --- OUTIL 4 : COÛT DE LICENCIEMENT (PRO/COMPLET) ---
+
 # --- OUTIL 4 : COÛT DE LICENCIEMENT (MULTI-PAYS) ---
 class LicenciementRequest(BaseModel):
-    pays: str = Field(default="FR", description="Code pays: 'FR' ou 'MA'")
+    pays: Literal["FR", "MA"] = Field(default="FR", description="Code pays: 'FR' ou 'MA'")
     salaire_brut_mensuel: float = Field(..., gt=0)
     annees_anciennete: float = Field(..., ge=0)
     mois_preavis: int = Field(default=3, ge=0)
