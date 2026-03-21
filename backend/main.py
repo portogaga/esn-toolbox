@@ -1,20 +1,36 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from schemas import CJMRequest, SimulateurRequest, BancRequest, LicenciementRequest, ComparateurRequest, TACERequest, SplitContractRequest
+import os
 
 app = FastAPI(title="ESN Toolbox API - Moteur BizDev")
+
+# Allowed origins are read from an environment variable (comma-separated list).
+# Set ALLOWED_ORIGINS in production (e.g. "https://esntools.app").
+# Falls back to the production domain if not set.
+_raw_origins = os.getenv("ALLOWED_ORIGINS", "https://esntools.app")
+ALLOWED_ORIGINS = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
+)
+
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response: Response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    return response
 
 @app.get("/")
 def keep_alive():
     return {"status": "Moteur ESN Toolbox actif"}
-# Crucial pour connecter React plus tard
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # --- OUTIL 1 bis : CALCULATEUR DE CJM RAPIDE (FR/MA) ---
 @app.post("/calcul-cjm-rapide")
