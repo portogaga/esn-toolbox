@@ -5,6 +5,8 @@ fastapi==0.115.14
 uvicorn[standard]==0.32.1
 pymupdf==1.27.2
 instructor==1.15.1
+# requis à l’exécution par instructor (GenAI structured outputs), pas toujours déclaré en dépendance
+jsonref==1.1.0
 google-genai==1.72.0
 python-docx==1.2.0
 docxtpl==0.20.2
