@@ -1,3 +1,12 @@
 fastapi
 uvicorn
+pymupdf
+instructor
+google-genai
+python-docx
+python-multipart
+python-dotenv
+jsonref
 pydantic
+python-jose
+clerk-sdk-python

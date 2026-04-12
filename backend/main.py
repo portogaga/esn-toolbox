@@ -1,8 +1,38 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from schemas import CJMRequest, SimulateurRequest, BancRequest, LicenciementRequest, ComparateurRequest, TACERequest, SplitContractRequest
+import uuid
+from contextlib import asynccontextmanager
+from pathlib import Path
 
-app = FastAPI(title="ESN Toolbox API - Moteur BizDev")
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from starlette.background import BackgroundTask
+
+from pdf_service import extraire_texte_pdf
+from schemas import (
+    CJMRequest,
+    SimulateurRequest,
+    BancRequest,
+    LicenciementRequest,
+    ComparateurRequest,
+    TACERequest,
+    SplitContractRequest,
+)
+from word_service import generer_word
+
+BASE_DIR = Path(__file__).resolve().parent
+TEMP_UPLOADS = BASE_DIR / "temp_uploads"
+TEMP_OUTPUTS = BASE_DIR / "temp_outputs"
+TEMPLATE_CV_PATH = BASE_DIR / "templates" / "template_maltem.docx"
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    TEMP_UPLOADS.mkdir(parents=True, exist_ok=True)
+    TEMP_OUTPUTS.mkdir(parents=True, exist_ok=True)
+    yield
+
+
+app = FastAPI(title="ESN Toolbox API - Moteur BizDev", lifespan=lifespan)
 
 @app.get("/")
 def keep_alive():
@@ -332,3 +362,166 @@ def calcul_split_contract(data: SplitContractRequest):
         "detail_ir": donnees_paie["ir"],
         "detail_charges": round(donnees_paie["charges"], 2)
     }
+
+
+# --- CV & IA : extraction PDF → structuration → Word ---
+@app.post("/extract-cv")
+async def extract_cv(
+    file: UploadFile = File(..., description="CV au format PDF"),
+    fiche_poste: str = Form("", description="Fiche de poste optionnelle pour orienter le CV"),
+):
+    """
+    Lit le PDF, extrait le texte, appelle l'IA pour structurer le profil, génère le document Word.
+    """
+    filename = (file.filename or "").lower()
+    if not filename.endswith(".pdf"):
+        raise HTTPException(
+            status_code=400,
+            detail="Seuls les fichiers PDF sont acceptés.",
+        )
+
+    uid = str(uuid.uuid4())
+    upload_path = TEMP_UPLOADS / f"{uid}.pdf"
+    output_path = TEMP_OUTPUTS / f"{uid}.docx"
+
+    try:
+        raw = await file.read()
+        if not raw:
+            raise HTTPException(status_code=400, detail="Fichier PDF vide.")
+        upload_path.write_bytes(raw)
+    except HTTPException:
+        raise
+    except OSError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Impossible d'enregistrer le fichier temporaire : {e}",
+        ) from e
+
+    texte = extraire_texte_pdf(str(upload_path))
+    upload_path.unlink(missing_ok=True)
+
+    if not texte.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="Impossible d'extraire du texte du PDF (fichier illisible ou corrompu).",
+        )
+
+    if not TEMPLATE_CV_PATH.is_file():
+        raise HTTPException(
+            status_code=500,
+            detail="Modèle Word introuvable sur le serveur (templates/template_maltem.docx).",
+        )
+
+    try:
+        from llm_service import extraire_cv
+
+        profil = extraire_cv(texte, fiche_poste if fiche_poste.strip() else None)
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=502,
+            detail=f"Erreur lors de l'appel à l'IA : {e}",
+        ) from e
+
+    try:
+        generer_word(profil, str(TEMPLATE_CV_PATH), str(output_path))
+    except Exception as e:
+        output_path.unlink(missing_ok=True)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Génération du document Word impossible : {e}",
+        ) from e
+
+    base_name = (profil.nom_complet or "candidat").strip() or "candidat"
+    safe = "".join(
+        c if c.isalnum() or c in (" ", "-", "_") else "_" for c in base_name
+    ).strip()[:80] or "candidat"
+    download_name = f"Profil_Maltem_{safe.replace(' ', '_')}.docx"
+
+    return FileResponse(
+        path=str(output_path),
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        filename=download_name,
+        background=BackgroundTask(lambda p=output_path: p.unlink(missing_ok=True)),
+    )
+
+
+# --- CV & IA : scoring multi-CV vs fiche de poste ---
+@app.post("/score-cvs")
+async def score_cvs(
+    fiche_poste: str = Form(..., description="Texte de la fiche de poste / besoin"),
+    files: list[UploadFile] = File(..., description="Un ou plusieurs CV au format PDF"),
+):
+    """
+    Pour chaque PDF : extraction du texte, appel IA de scoring, retour JSON (liste ordonnée côté client).
+    """
+    if not fiche_poste.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="Collez une fiche de poste avant de lancer le scoring.",
+        )
+    if not files:
+        raise HTTPException(
+            status_code=400,
+            detail="Ajoutez au moins un CV au format PDF.",
+        )
+
+    try:
+        from llm_service import scorer_cv
+    except Exception as e:
+        raise HTTPException(
+            status_code=503,
+            detail=f"Service IA indisponible : {e}",
+        ) from e
+
+    results: list[dict] = []
+
+    for upload in files:
+        name = (upload.filename or "").lower()
+        if not name.endswith(".pdf"):
+            raise HTTPException(
+                status_code=400,
+                detail=f"Fichier non-PDF ou invalide : {upload.filename!r}",
+            )
+
+        uid = str(uuid.uuid4())
+        path = TEMP_UPLOADS / f"{uid}.pdf"
+
+        try:
+            data = await upload.read()
+            if not data:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"PDF vide : {upload.filename!r}",
+                )
+            path.write_bytes(data)
+        except HTTPException:
+            raise
+        except OSError as e:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Écriture temporaire impossible ({upload.filename}) : {e}",
+            ) from e
+
+        texte = extraire_texte_pdf(str(path))
+        path.unlink(missing_ok=True)
+
+        if not texte.strip():
+            raise HTTPException(
+                status_code=400,
+                detail=f"Impossible d'extraire du texte du CV : {upload.filename!r}",
+            )
+
+        try:
+            score = scorer_cv(texte, fiche_poste)
+            results.append(score.model_dump())
+        except HTTPException:
+            raise
+        except Exception as e:
+            raise HTTPException(
+                status_code=502,
+                detail=f"Erreur IA pour {upload.filename!r} : {e}",
+            ) from e
+
+    return results

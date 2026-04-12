@@ -57,3 +57,57 @@ class TACERequest(BaseModel):
 class SplitContractRequest(BaseModel):
     cjm: float = Field(..., gt=0, description="Coût Journalier Moyen du consultant")
     net_declare: int = Field(..., description="Salaire net sélectionné dans la grille stricte")
+
+
+class ScoreResult(BaseModel):
+    nom_candidat: str = Field(description="Nom du candidat tel qu'identifié sur le CV")
+    score_pourcentage: int = Field(
+        ge=0,
+        le=100,
+        description="Pourcentage de compatibilité CV / fiche de poste (0 à 100)",
+    )
+    points_forts: list[str] = Field(
+        default_factory=list,
+        description="Atouts et correspondances réelles avec la fiche de poste",
+    )
+    competences_manquantes: list[str] = Field(
+        default_factory=list,
+        description="Exigences de la fiche non couvertes ou insuffisamment démontrées sur le CV",
+    )
+    justification_courte: str = Field(
+        description="Synthèse en quelques phrases expliquant le score de façon factuelle"
+    )
+
+
+class SkillCategory(BaseModel):
+    nom_categorie: str = Field(description="Nom de la catégorie de compétences (ex: Réseaux, Sécurité, Cloud)")
+    liste_competences: str = Field(description="Compétences séparées par des virgules")
+
+
+class Education(BaseModel):
+    annee: str = Field(description="Année ou période du diplôme")
+    diplome: str = Field(description="Intitulé du diplôme ou de la certification")
+
+
+class Experience(BaseModel):
+    date: str = Field(description="Période de l'expérience (ex: 2022–2024)")
+    entreprise: str = Field(description="Nom de l'entreprise et éventuellement du client")
+    titre_poste: str = Field(description="Intitulé du poste occupé")
+    contexte: str = Field(description="Description des missions et responsabilités")
+
+
+class ProfilCandidat(BaseModel):
+    nom_complet: str = Field(description="Prénom et nom du candidat")
+    annees_experience: int = Field(description="Nombre d'années d'expérience professionnelle")
+    titre_profil: str = Field(description="Titre professionnel actuel ou visé")
+    resume: str = Field(description="Résumé du profil professionnel en quelques phrases")
+    skill_categories: list[SkillCategory] = Field(
+        description="Catégories de compétences techniques regroupées intelligemment"
+    )
+    core_expertise: list[str] = Field(
+        description="Domaines d'expertise principaux du candidat"
+    )
+    education: list[Education] = Field(description="Diplômes et certifications")
+    experiences: list[Experience] = Field(
+        description="Expériences professionnelles ordonnées de la plus récente à la plus ancienne"
+    )

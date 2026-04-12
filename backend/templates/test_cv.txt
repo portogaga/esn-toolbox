@@ -1,0 +1,112 @@
+Personal Profile
+Name: Adnane OUAHIDY 
++1
+
+Experience: 5 years 
++1
+
+Current Role: Network Deployment & Connectivity Pilot 
++1
+
+Professional Summary: Network Engineer specializing in deployment and connectivity, with experience in LAN/WAN/Wi-Fi migrations, equipment integration, and large-scale infrastructure supervision. Experienced in managing complex changes in security and routing while maintaining SLAs.
++1
+
+Technical Skills
+Network Management & Protocols
+
+Tools: Cisco DNA Center, Nagios, HP NNMI, Cisco Prime, VMware SASE Orchestrator, Zabbix, Aruba Central Networking, Cisco ESA, Cisco SMA.
+
+Protocols: OSPF, EIGRP, BGP, RIP, VRRP, HSRP, SD-WAN.
+
+Hardware: Cisco, Aruba, Nexus, Juniper, Comware.
+
+Security & Cloud
+
+Security Tools: Cisco ISE, Fortinet, Palo Alto, Sophos Firewalls, VPN (DMVPN, IPsec).
++1
+
+Cloud & Virtualization: VMware, Nutanix, Azure, Terraform, Ansible, Docker.
+
+Backup: Veeam.
+
+Systems & VoIP
+
+Operating Systems: Windows, Linux, macOS.
+
+VoIP & Wireless: Cisco WLC, Aruba, UCOPIA, Velocloud.
+
+ITSM Tools: ServiceNow, GLPI.
+
+Storage: NAS, SAN, DAS.
+
+Soft Skills
+
+Analytical and synthesis spirit.
+
+Problem resolution.
+
+Professional Experience
+Maltem Africa (Client: Air Liquide)
+
+Role: Network Deployment & Connectivity Pilot | Dates: 2022–Present 
++2
+
+Proactive supervision and maintenance of an intercontinental IT network (EMEA, APAC, NAM, SAM) with over 15,000 devices.
+
+Diagnosis and resolution of incidents across LAN, WAN, VSAT, DHCP, SMTP, and Wi-Fi.
+
+Collaboration with international ISPs (Orange, AT&T, Singtel, Verizon, Vodafone).
+
+Configuration and deployment of routers, switches, and access points (Cisco, Aruba, Viptela, Nexus, etc.).
+
+Leading training for L1 engineers and creating technical documentation.
+
+Execution of simple to complex network changes (security, routing, LAN/WAN).
+
+Intelcia IT Solutions
+
+Role: Consultant / Support | Dates: 2021–2022 
++1
+
+Proactive supervision of thousands of international network devices.
+
+Direct follow-up of WAN incidents with telecom operators.
+
+Handling multi-channel client requests (calls, emails, tickets) and providing technical assistance.
+
+Allo PC
+
+Role: Network Consultant 
+
+Administration and maintenance of client LAN/WAN networks.
+
+Support for Windows, Linux, and server environments.
+
+Data security via Veeam and Sophos firewall administration.
+
+Configuration and management of Microsoft 365 environments.
+
+SmartsVC
+
+Role: IT Technician | Dates: 2020–2021 
+
+Supervision of technical teams and management of performance KPIs.
+
+Creation of technical guides and organization of user training.
+
+IT infrastructure management to ensure operational excellence.
+
+Education & Certifications
+Education
+
+Master's Degree: Systems Engineering: Networks and Security.
+
+Certifications
+
+Cisco CCNP Enterprise Core Certification.
+
+Aruba Certified Network Associate (NCA).
+
+Cisco Python Essentials 1.
+
+Cisco Operating Systems Basics.

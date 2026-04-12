@@ -5,6 +5,8 @@ node_modules/
 # Backend / Python
 venv/
 __pycache__/
+backend/temp_uploads/
+backend/temp_outputs/
 
 # Environment files
 *.env

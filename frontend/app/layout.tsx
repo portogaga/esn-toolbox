@@ -1,4 +1,10 @@
 import type { Metadata } from "next";
+import {
+  ClerkProvider,
+  Show,
+  SignInButton,
+  UserButton,
+} from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CurrencyProvider } from "./context/CurrencyContext";
@@ -34,9 +40,26 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-950 text-zinc-50`}
       >
-        <CurrencyProvider>
-          <AppShell>{children}</AppShell>
-        </CurrencyProvider>
+        <ClerkProvider>
+          <header className="flex h-12 shrink-0 items-center justify-end border-b border-zinc-800 bg-zinc-950 px-4 sm:px-6">
+            <Show when="signed-out">
+              <SignInButton mode="modal">
+                <button
+                  type="button"
+                  className="rounded-full border border-zinc-700/80 bg-zinc-900/80 px-4 py-2 text-sm font-medium text-zinc-100 transition hover:border-zinc-600 hover:bg-zinc-800"
+                >
+                  Connexion
+                </button>
+              </SignInButton>
+            </Show>
+            <Show when="signed-in">
+              <UserButton afterSignOutUrl="/" />
+            </Show>
+          </header>
+          <CurrencyProvider>
+            <AppShell>{children}</AppShell>
+          </CurrencyProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
