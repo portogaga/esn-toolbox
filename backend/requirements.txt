@@ -7,6 +7,6 @@ python-docx
 python-multipart
 python-dotenv
 jsonref
-pydantic
-python-jose
+pydantic>=2.0
+python-jose[cryptography]
 clerk-sdk-python
