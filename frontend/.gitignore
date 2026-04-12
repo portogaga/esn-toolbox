@@ -16,6 +16,8 @@
 # next.js
 /.next/
 /out/
+# Next.js 16+ : utiliser uniquement proxy.ts (middleware.ts en plus casse le build)
+/middleware.ts
 
 # production
 /build
