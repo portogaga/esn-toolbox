@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import {
   ClerkProvider,
-  Show,
+  SignedIn,
+  SignedOut,
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
@@ -20,13 +21,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
 export const metadata: Metadata = {
-  metadataBase: new URL('https://esntools.app'), // Ajoute cette ligne
+  metadataBase: new URL('https://esntools.app'),
   title: "ESN Toolbox — Simulateur de rentabilité",
   description: "Simulateur de rentabilité ESN : CJM, TJM, marge et gain par jour.",
   alternates: {
-    canonical: '/', // Et celle-ci
+    canonical: '/',
   },
 };
 
@@ -36,13 +36,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-950 text-zinc-50`}
-      >
-        <ClerkProvider>
+    // On passe la redirection globale ici dans ClerkProvider
+    <ClerkProvider afterSignOutUrl="/">
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-950 text-zinc-50`}
+        >
           <header className="flex h-12 shrink-0 items-center justify-end border-b border-zinc-800 bg-zinc-950 px-4 sm:px-6">
-            <Show when="signed-out">
+            {/* Si l'utilisateur n'est PAS connecté */}
+            <SignedOut>
               <SignInButton mode="modal">
                 <button
                   type="button"
@@ -51,16 +53,21 @@ export default function RootLayout({
                   Connexion
                 </button>
               </SignInButton>
-            </Show>
-            <Show when="signed-in">
-              <UserButton afterSignOutUrl="/" />
-            </Show>
+            </SignedOut>
+
+            {/* Si l'utilisateur EST connecté */}
+            <SignedIn>
+              <div className="flex items-center gap-4">
+                <UserButton />
+              </div>
+            </SignedIn>
           </header>
+
           <CurrencyProvider>
             <AppShell>{children}</AppShell>
           </CurrencyProvider>
-        </ClerkProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
