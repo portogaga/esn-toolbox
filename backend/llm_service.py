@@ -37,6 +37,11 @@ RÈGLES CRITIQUES :
 - RÉSUMÉ : Rédige une présentation professionnelle et percutante du candidat.
 - FORMAT : Respecte scrupuleusement le schéma Pydantic fourni.
 
+EXPÉRIENCES PROFESSIONNELLES (champ « taches ») :
+- Pour chaque expérience, ne remplis pas un long paragraphe : fournis une liste « taches » de 3 à 5 chaînes courtes.
+- Chaque chaîne = une puce percutante, orientée réalisations mesurables ou livrables (verbes d'action : Concevoir, Industrialiser, Piloter, Réduire de X %, etc.) et mots-clés techniques du CV (stack, outils, normes).
+- Pas de redite entre les puces ; pas d'invention ; une puce peut résumer plusieurs lignes du CV si c'est factuel.
+
 ORIENTATION FICHE DE POSTE :
 Si une fiche de poste est fournie, tu dois mettre en valeur les expériences et les compétences du candidat qui correspondent spécifiquement à cette fiche de poste. Réécris le résumé du candidat pour qu'il cible ce besoin. Règle absolue : Ne mens pas, n'invente aucune compétence que le candidat n'a pas, contente-toi de réorganiser et de valoriser l'existant.
 """
