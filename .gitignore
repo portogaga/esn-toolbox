@@ -14,6 +14,8 @@ backend/temp_outputs/
 
 # OS / editor junk
 .DS_Store
+# Fichier de verrouillage Word (ne pas versionner)
+~$*.docx
 .idea/
 .vscode/
 
