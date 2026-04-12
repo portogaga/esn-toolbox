@@ -85,12 +85,16 @@ class SkillCategory(BaseModel):
 
 
 class Education(BaseModel):
-    annee: str = Field(description="Année ou période du diplôme")
+    annee: str = Field(
+        description="Période du diplôme en chiffres : MM/YYYY ou MM/YYYY - MM/YYYY (ex. 09/2018 - 06/2020). Ne pas écrire les mois en toutes lettres."
+    )
     diplome: str = Field(description="Intitulé du diplôme ou de la certification")
 
 
 class Experience(BaseModel):
-    date: str = Field(description="Période de l'expérience (ex: 2022–2024)")
+    date: str = Field(
+        description="Période d'emploi en chiffres : MM/YYYY ou MM/YYYY - MM/YYYY (ex. 08/2021 - 05/2024). Ne pas écrire les mois en toutes lettres."
+    )
     entreprise: str = Field(description="Nom de l'entreprise et éventuellement du client")
     titre_poste: str = Field(description="Intitulé du poste occupé")
     description: list[str] = Field(

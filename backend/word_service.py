@@ -4,6 +4,7 @@ from pathlib import Path
 
 from docxtpl import DocxTemplate
 
+from cv_date_format import normalize_profil_dates_for_template
 from schemas import ProfilCandidat
 
 
@@ -28,6 +29,8 @@ def _strip_last_rendered_page_breaks(docx_path: str) -> None:
 
 def generer_word(donnees: ProfilCandidat, template_path: str, output_path: str) -> None:
     doc = DocxTemplate(template_path)
-    doc.render(donnees.model_dump())
+    ctx = donnees.model_dump()
+    normalize_profil_dates_for_template(ctx)
+    doc.render(ctx)
     doc.save(output_path)
     _strip_last_rendered_page_breaks(output_path)

@@ -37,6 +37,11 @@ RÈGLES CRITIQUES :
 - RÉSUMÉ : Rédige une présentation professionnelle et percutante du candidat.
 - FORMAT : Respecte scrupuleusement le schéma Pydantic fourni.
 
+DATES (chiffres uniquement, format MM/YYYY) :
+- Pour chaque expérience, le champ « date » doit être au format **MM/YYYY** (mois sur 2 chiffres, année sur 4), jamais le nom du mois en lettres (pas « Août 2021 », pas « Aout 2021 »).
+- Plage : **MM/YYYY - MM/YYYY** (ex. `08/2021 - 05/2024`). Poste en cours : **MM/YYYY - Présent** (ex. `03/2022 - Présent`).
+- Même logique pour les diplômes : le champ « annee » de chaque entrée « education » en **MM/YYYY** ou plage **MM/YYYY - MM/YYYY**.
+
 EXPÉRIENCES PROFESSIONNELLES — champ JSON exact « description » (liste de chaînes) :
 - Pour chaque expérience, remplis le champ « description » avec une liste (array) de 3 à 5 chaînes : ce sont les bullet points des missions.
 - Ne mets pas un seul bloc de texte : toujours plusieurs entrées dans la liste « description ».
@@ -65,7 +70,7 @@ EXIGENCES :
 def scorer_cv(texte_cv: str, fiche_poste: str) -> ScoreResult:
     """
     Compare un CV (texte) à une fiche de poste et retourne un score structuré.
-    Modèle par défaut : gemini-pro (surcharge possible via GEMINI_MODEL_SCORE si indisponible).
+    Modèle par défaut : gemini-2.5-flash (surcharge possible via GEMINI_MODEL_SCORE si indisponible).
     """
     model_id = os.getenv("GEMINI_MODEL_SCORE", "gemini-2.5-flash")
 
