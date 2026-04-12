@@ -28,7 +28,7 @@ client = instructor.from_genai(
 )
 
 SYSTEM_PROMPT = """
-Tu es un expert en recrutement IT pour Maltem Africa. 
+Tu es un expert en recrutement IT. 
 Ta mission est d'analyser un CV brut et d'extraire les données de manière structurée.
 
 RÈGLES CRITIQUES :
@@ -37,9 +37,10 @@ RÈGLES CRITIQUES :
 - RÉSUMÉ : Rédige une présentation professionnelle et percutante du candidat.
 - FORMAT : Respecte scrupuleusement le schéma Pydantic fourni.
 
-EXPÉRIENCES PROFESSIONNELLES (champ « taches ») :
-- Pour chaque expérience, ne remplis pas un long paragraphe : fournis une liste « taches » de 3 à 5 chaînes courtes.
-- Chaque chaîne = une puce percutante, orientée réalisations mesurables ou livrables (verbes d'action : Concevoir, Industrialiser, Piloter, Réduire de X %, etc.) et mots-clés techniques du CV (stack, outils, normes).
+EXPÉRIENCES PROFESSIONNELLES — champ JSON exact « description » (liste de chaînes) :
+- Pour chaque expérience, remplis le champ « description » avec une liste (array) de 3 à 5 chaînes : ce sont les bullet points des missions.
+- Ne mets pas un seul bloc de texte : toujours plusieurs entrées dans la liste « description ».
+- Chaque chaîne = une puce percutante (réalisations mesurables ou livrables, verbes d'action, mots-clés techniques du CV : stack, outils, normes).
 - Pas de redite entre les puces ; pas d'invention ; une puce peut résumer plusieurs lignes du CV si c'est factuel.
 
 ORIENTATION FICHE DE POSTE :

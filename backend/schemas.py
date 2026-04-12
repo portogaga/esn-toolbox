@@ -93,8 +93,8 @@ class Experience(BaseModel):
     date: str = Field(description="Période de l'expérience (ex: 2022–2024)")
     entreprise: str = Field(description="Nom de l'entreprise et éventuellement du client")
     titre_poste: str = Field(description="Intitulé du poste occupé")
-    taches: list[str] = Field(
-        description="3 à 5 puces courtes par expérience : réalisations concrètes et mots-clés techniques (une entrée = une puce).",
+    description: list[str] = Field(
+        description="Détails de la mission : 3 à 5 puces courtes (une chaîne = une puce), réalisations et mots-clés techniques.",
         min_length=1,
         max_length=8,
     )
