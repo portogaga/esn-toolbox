@@ -21,13 +21,10 @@ if not gcp_project_id or not gcp_location:
 
 vertexai.init(project=gcp_project_id, location=gcp_location)
 
-
-def _vertex_client(model_id: str):
-    model = GenerativeModel(model_id)
-    return instructor.from_vertexai(
-        client=model,
-        mode=instructor.Mode.VERTEXAI_JSON,
-    )
+client = instructor.from_vertexai(
+    client=GenerativeModel("gemini-2.5-flash"),
+    mode=instructor.Mode.VERTEXAI_TOOLS,
+)
 
 SYSTEM_PROMPT = """
 Tu es un expert en recrutement IT. 
@@ -74,8 +71,6 @@ def scorer_cv(texte_cv: str, fiche_poste: str) -> ScoreResult:
     Compare un CV (texte) à une fiche de poste et retourne un score structuré.
     Modèle par défaut : gemini-2.5-flash (surcharge possible via GEMINI_MODEL_SCORE).
     """
-    model_id = os.getenv("GEMINI_MODEL_SCORE", "gemini-2.5-flash")
-
     user_content = (
         "--- Fiche de poste / besoin ---\n\n"
         f"{fiche_poste.strip()}\n\n"
@@ -83,12 +78,7 @@ def scorer_cv(texte_cv: str, fiche_poste: str) -> ScoreResult:
         f"{texte_cv.strip()}"
     )
 
-    client = _vertex_client(model_id)
-    return client.chat.completions.create(
-        config={
-            "max_output_tokens": 2048,
-            "temperature": 0.15,
-        },
+    return client.create(
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT_SCORING},
             {"role": "user", "content": user_content},
@@ -102,10 +92,6 @@ def extraire_cv(texte_brut: str, fiche_poste: str | None = None) -> ProfilCandid
     Analyse le texte et retourne l'objet structuré pour le template Word.
     Si ``fiche_poste`` est renseignée, le profil est orienté vers ce besoin (sans invention).
     """
-    # Anciens IDs (gemini-pro, gemini-2.0-flash pour nouveaux comptes) → 404.
-    # Défaut : modèle actuellement ouvert aux nouveaux utilisateurs. Surcharge : GEMINI_MODEL.
-    model_id = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
-
     user_content = f"Voici le texte brut du CV à traiter :\n\n{texte_brut}"
     if fiche_poste and fiche_poste.strip():
         user_content += (
@@ -113,12 +99,7 @@ def extraire_cv(texte_brut: str, fiche_poste: str | None = None) -> ProfilCandid
             f"{fiche_poste.strip()}"
         )
 
-    client = _vertex_client(model_id)
-    return client.chat.completions.create(
-        config={
-            "max_output_tokens": 4096,
-            "temperature": 0.1,
-        },
+    return client.create(
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_content},
