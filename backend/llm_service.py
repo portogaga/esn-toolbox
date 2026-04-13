@@ -78,10 +78,10 @@ def scorer_cv(texte_cv: str, fiche_poste: str) -> ScoreResult:
         f"{texte_cv.strip()}"
     )
 
+    merged_user_content = f"{SYSTEM_PROMPT_SCORING}\n\n{user_content}"
     return client.create(
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT_SCORING},
-            {"role": "user", "content": user_content},
+            {"role": "user", "content": merged_user_content},
         ],
         response_model=ScoreResult,
     )
@@ -99,10 +99,10 @@ def extraire_cv(texte_brut: str, fiche_poste: str | None = None) -> ProfilCandid
             f"{fiche_poste.strip()}"
         )
 
+    merged_user_content = f"{SYSTEM_PROMPT}\n\n{user_content}"
     return client.create(
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_content},
+            {"role": "user", "content": merged_user_content},
         ],
         response_model=ProfilCandidat,
     )
