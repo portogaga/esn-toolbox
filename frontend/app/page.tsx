@@ -5,6 +5,7 @@ import {
   Activity,
   Building2,
   ChevronRight,
+  FileText,
   Hourglass,
   LineChart,
   PieChart,
@@ -48,6 +49,13 @@ const TOOLS = [
     description: "Indemnités, préavis, ICCP, risque Prud’homal : provisionnez au plus juste.",
     icon: Scale,
     accent: "rose",
+  },
+  {
+    href: "/cv-generator",
+    name: "CV & Talents",
+    description: "Generez des CV formates Maltem instantanement.",
+    icon: FileText,
+    accent: "emerald",
   },
   {
     href: "/tace",
@@ -116,7 +124,7 @@ export default function Home() {
             Le Couteau Suisse du Business Developer ESN.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-400 sm:text-xl">
-            7 outils de précision pour piloter votre rentabilité, de Casablanca à Paris.
+            8 outils de precision pour piloter votre rentabilite, de Casablanca a Paris.
           </p>
         </section>
 
@@ -129,7 +137,7 @@ export default function Home() {
           </p>
         </blockquote>
 
-        {/* Grille des 7 outils */}
+        {/* Grille des outils */}
         <section className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {TOOLS.map((tool) => {
             const Icon = tool.icon;

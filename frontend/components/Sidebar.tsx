@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   Activity,
   Building2,
+  FileText,
   Gauge,
   Hourglass,
   LineChart,
@@ -22,6 +23,7 @@ const links = [
   { href: "/banc", label: "Impact Inter-contrat", icon: Hourglass },
   { href: "/licenciement", label: "Provision Licenciement", icon: Scale },
   { href: "/comparateur", label: "CDI vs Freelance", icon: Building2 },
+  { href: "/cv-generator", label: "CV & Talents", icon: FileText },
   { href: "/tace", label: "Pilotage TACE", icon: Activity },
   { href: "/split-contract", label: "Split Contract", icon: PieChart },
 ];
