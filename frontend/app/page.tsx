@@ -10,6 +10,7 @@ import {
   LineChart,
   PieChart,
   Scale,
+  Users,
   Zap,
 } from "lucide-react";
 import { useCurrency } from "./context/CurrencyContext";
@@ -51,11 +52,18 @@ const TOOLS = [
     accent: "rose",
   },
   {
-    href: "/cv-generator",
-    name: "CV & Talents",
+    href: "/cv",
+    name: "CV",
     description: "Generez des CV formates Maltem instantanement.",
     icon: FileText,
     accent: "emerald",
+  },
+  {
+    href: "/radar-talents",
+    name: "Radar Talents",
+    description: "Identifiez rapidement les profils et competences cles de vos talents.",
+    icon: Users,
+    accent: "indigo",
   },
   {
     href: "/tace",
@@ -124,7 +132,7 @@ export default function Home() {
             Le Couteau Suisse du Business Developer ESN.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-400 sm:text-xl">
-            8 outils de precision pour piloter votre rentabilite, de Casablanca a Paris.
+            9 outils de precision pour piloter votre rentabilite, de Casablanca a Paris.
           </p>
         </section>
 

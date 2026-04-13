@@ -11,6 +11,7 @@ import {
   LineChart,
   PieChart,
   Scale,
+  Users,
   X,
   Zap,
 } from "lucide-react";
@@ -23,7 +24,8 @@ const links = [
   { href: "/banc", label: "Impact Inter-contrat", icon: Hourglass },
   { href: "/licenciement", label: "Provision Licenciement", icon: Scale },
   { href: "/comparateur", label: "CDI vs Freelance", icon: Building2 },
-  { href: "/cv-generator", label: "CV & Talents", icon: FileText },
+  { href: "/cv", label: "CV", icon: FileText },
+  { href: "/radar-talents", label: "Radar Talents", icon: Users },
   { href: "/tace", label: "Pilotage TACE", icon: Activity },
   { href: "/split-contract", label: "Split Contract", icon: PieChart },
 ];
