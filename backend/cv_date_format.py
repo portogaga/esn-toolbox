@@ -99,6 +99,6 @@ def normalize_profil_dates_for_template(data: dict) -> None:
     for exp in data.get("experiences") or []:
         if isinstance(exp.get("date"), str):
             exp["date"] = normalize_cv_date_string(exp["date"])
-    for edu in data.get("education") or []:
-        if isinstance(edu.get("annee"), str):
-            edu["annee"] = normalize_cv_date_string(edu["annee"])
+    for formation in data.get("formations") or []:
+        if isinstance(formation.get("annee"), str):
+            formation["annee"] = normalize_cv_date_string(formation["annee"])

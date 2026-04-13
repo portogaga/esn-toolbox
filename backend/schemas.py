@@ -81,26 +81,64 @@ class ScoreResult(BaseModel):
 
 class SkillCategory(BaseModel):
     nom_categorie: str = Field(description="Nom de la catégorie de compétences (ex: Réseaux, Sécurité, Cloud)")
-    liste_competences: str = Field(description="Compétences séparées par des virgules")
+    elements: list[str] = Field(
+        default_factory=list,
+        description="Liste des compétences, outils ou technologies de la catégorie."
+    )
 
 
-class Education(BaseModel):
+class Formation(BaseModel):
     annee: str = Field(
         description="Période du diplôme en chiffres : MM/YYYY ou MM/YYYY - MM/YYYY (ex. 09/2018 - 06/2020). Ne pas écrire les mois en toutes lettres."
     )
-    diplome: str = Field(description="Intitulé du diplôme ou de la certification")
+    diplome: str = Field(description="Intitulé du diplôme")
+    ecole: str = Field(description="Nom de l'école, université ou établissement")
 
 
 class Experience(BaseModel):
+    entreprise: str = Field(
+        default="",
+        description="Nom de l'entreprise (ESN/employeur). Laisser vide si introuvable."
+    )
+    client: str = Field(
+        default="",
+        description="Nom du client final si mentionné. Optionnel: laisser vide si absent."
+    )
+    titre_poste: str = Field(
+        default="",
+        description="Intitulé exact du poste occupé. Laisser vide si introuvable."
+    )
     date: str = Field(
+        default="",
         description="Période d'emploi en chiffres : MM/YYYY ou MM/YYYY - MM/YYYY (ex. 08/2021 - 05/2024). Ne pas écrire les mois en toutes lettres."
     )
-    entreprise: str = Field(description="Nom de l'entreprise et éventuellement du client")
-    titre_poste: str = Field(description="Intitulé du poste occupé")
-    description: list[str] = Field(
-        description="Détails de la mission : 3 à 5 puces courtes (une chaîne = une puce), réalisations et mots-clés techniques.",
-        min_length=1,
-        max_length=8,
+    projet: str = Field(
+        default="",
+        description="Courte phrase décrivant le projet global de la mission."
+    )
+    role_detail: str = Field(
+        default="",
+        description="Rôle exact joué par le consultant dans la mission."
+    )
+    contexte: str = Field(
+        default="",
+        description="Contexte et enjeux de la mission en 1 à 2 phrases."
+    )
+    objectifs: str = Field(
+        default="",
+        description="Objectifs de la mission en 1 à 2 phrases."
+    )
+    realisations: list[str] = Field(
+        default_factory=list,
+        description="Liste des tâches techniques réalisées."
+    )
+    resultats: list[str] = Field(
+        default_factory=list,
+        description="Liste des impacts, résultats et KPIs obtenus."
+    )
+    environnement: str = Field(
+        default="",
+        description="Stack technique sous forme de chaîne, séparée par ' | ' (ex: GitLab CI | Jenkins | Terraform)."
     )
 
 
@@ -109,13 +147,22 @@ class ProfilCandidat(BaseModel):
     annees_experience: int = Field(description="Nombre d'années d'expérience professionnelle")
     titre_profil: str = Field(description="Titre professionnel actuel ou visé")
     resume: str = Field(description="Résumé du profil professionnel en quelques phrases")
-    skill_categories: list[SkillCategory] = Field(
-        description="Catégories de compétences techniques regroupées intelligemment"
+    competences_techniques: list[SkillCategory] = Field(
+        default_factory=list,
+        description="Compétences techniques regroupées par catégories (ex: Langages, DevOps, Cloud)."
     )
-    core_expertise: list[str] = Field(
-        description="Domaines d'expertise principaux du candidat"
+    competences_fonctionnelles: list[str] = Field(
+        default_factory=list,
+        description="Compétences fonctionnelles: méthodologies, pilotage, expertise métier, communication, etc."
     )
-    education: list[Education] = Field(description="Diplômes et certifications")
+    formations: list[Formation] = Field(
+        default_factory=list,
+        description="Parcours académique (écoles, universités, diplômes)."
+    )
+    certifications: list[str] = Field(
+        default_factory=list,
+        description="Liste des certifications professionnelles (ex: Cisco, AWS, Scrum, Huawei)."
+    )
     experiences: list[Experience] = Field(
         description="Expériences professionnelles ordonnées de la plus récente à la plus ancienne"
     )
