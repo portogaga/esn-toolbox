@@ -72,7 +72,7 @@ def scorer_cv(texte_cv: str, fiche_poste: str) -> ScoreResult:
     Compare un CV (texte) à une fiche de poste et retourne un score structuré.
     Modèle par défaut : gemini-2.5-flash (surcharge possible via GEMINI_MODEL_SCORE si indisponible).
     """
-    model_id = os.getenv("GEMINI_MODEL_SCORE", "gemini-1.5-pro")
+    model_id = os.getenv("GEMINI_MODEL_SCORE", "gemini-2.5-flash")
 
     user_content = (
         "--- Fiche de poste / besoin ---\n\n"
@@ -102,7 +102,7 @@ def extraire_cv(texte_brut: str, fiche_poste: str | None = None) -> ProfilCandid
     """
     # Anciens IDs (gemini-pro, gemini-2.0-flash pour nouveaux comptes) → 404.
     # Défaut : modèle actuellement ouvert aux nouveaux utilisateurs. Surcharge : GEMINI_MODEL.
-    model_id = os.getenv("GEMINI_MODEL", "gemini-1.5-pro")
+    model_id = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
     user_content = f"Voici le texte brut du CV à traiter :\n\n{texte_brut}"
     if fiche_poste and fiche_poste.strip():
