@@ -85,7 +85,6 @@ def scorer_cv(texte_cv: str, fiche_poste: str) -> ScoreResult:
 
     client = _vertex_client(model_id)
     return client.chat.completions.create(
-        model=model_id,
         config={
             "max_output_tokens": 2048,
             "temperature": 0.15,
@@ -116,7 +115,6 @@ def extraire_cv(texte_brut: str, fiche_poste: str | None = None) -> ProfilCandid
 
     client = _vertex_client(model_id)
     return client.chat.completions.create(
-        model=model_id,
         config={
             "max_output_tokens": 4096,
             "temperature": 0.1,
