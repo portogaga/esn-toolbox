@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "esntool",
+  "private_key_id": "043406f011933f79b06865276428a1cadd0f04ca",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzkDFgiv0j0TGC\nawDZtklMApL5ZN4MzXyZZm3G0KgYlvME+/fDyo+cork5E0eK+AhKnKsyYedJdsmp\nCy3qqV5lE3lKCWe8kF5y42YxIH09wzQ9ixzUkqYvFHTjeb08RewF9s+cq4q1Bj8L\n0XzLgC6a9rGy7HU2QxAHtkWX3wqxh2089+gSJ3B2iEpstnGeXi25bzUHeoxG1Kh5\nzQt6GSkcwjOoVwaXj9PewD+KLIRsgIShlrnVJsixreF1xeB8kvvuxHn2xBmT8bCv\nQWxVKu8x3nQ2DsbLlehGvbvUH8qd/YxJW7fDnPPWl7X2kjTYmVXo7Wm+q6Pf4Bri\nuqMiK8EJAgMBAAECggEAAw95F/kmeV7OZjemqw9FTotYr/F9K2CxN/gb9OCHjOu9\ntp8IyQiBzByl5YgjlwXFNmhXLqOmioUAyOXM4YwDdNuRHKbuYrNfOLwReNLh75SN\nJmNhmWnqdTD3EQ15ITbb3/ol7biqw40Ys/3dD6bepHuB6dfH46Xe9xKvOvhtOTtb\nXTY7tk7GUDT2nxcDyCHuM8FrQQuBNFvF61TELyOPVfNJJHpLgxor16v3BLYvGgy4\n20YQMFGZo5K4Im0XxLIURJ5MLNgWYK+ZS/tPFKJAH+FUZiD7FUzAyxI0XABA2f0l\nhzR9UAx+ceHIh0B/oOQ+WcXqHNY6I9IlsKvB/Zw7tQKBgQDYWDn9aKKgJRjbcTBy\nHczIg5Oq4rpYOtmsEFYx4LAu9FyA25sFq4/G1iFkyxVvyrBx8M/USA7aRpTUW174\nJv1JWbrBmtRdEtWsuuEt4d2odqhD1MJTmVQAaF9gG/FYTYXal75ncZBu0Eaow+MA\nFMtI1Jdbv52OxuMIRXX0OmpQawKBgQDUegimAwTJN7P/0L/IPBuEc5hi2Ldv5UDS\n59FCln1EEVYXsgxzMb6+6t7eQiNFKnKWPm6N6jDsFjeZj3atQMOLAKAc8GNskhMU\nyAEeJf2TP85N1wNKkPLQwt3qdG5sTM0PzvI5DKZrRQ+jw8Cmz0sheR3uMlCNLgH/\nZ4lJhWJBWwKBgQDBWjiZroaJsh4BIaw2kUOQgWfcdj4s1IvuJ7uhYDqV/HcgAyUN\ncENTZdT6jDZgbzo62wojozMDCcnB8Ndz2QTOJY+vsHzToh2t/md55j+AbGv+E4yJ\nwqM8qgtzjgWo8cALmUrmkKyRHTvJYSjjzbHRKY8MxLg//qixn8LHv918eQKBgBdO\nr6YuTJcaAie8qVz4ovgbigrFxRGEL2EzRrQsN9+Am1YMFOuJ+GeO8hWlYaMTrfAn\nNw9gMi+jnEO/BgCpSwnzbpzeDbn6KBeufNjmx/MgG6xUOqsyTUBzL86pKPe+UPw7\n8jwp1BOORtHrBjYGJTKty4e2gzmJY3S10cx70jRjAoGAOyhNhP/7bordN+ZSgSHv\ngr/t422VAAxGcnUvIuJqAjT9AaYRPia1PtUUCj8e6M6n+J1XhGkdq16IL6iivks2\nYa9NiBB1V9Cleu5ztYnoxCR2UWfVG60FUsN+37LLQOuVimqZ1p0OmPAY2Q3foJBA\nAKfwzD2pc57aBbIMXCy8zZk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "esn-tools-service-account@esntool.iam.gserviceaccount.com",
+  "client_id": "114304134211803322681",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/esn-tools-service-account%40esntool.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

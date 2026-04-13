@@ -2,30 +2,32 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import instructor
-from google import genai
+import vertexai
+from vertexai.generative_models import GenerativeModel
 from schemas import ProfilCandidat, ScoreResult
 
-# 1. Chargement robuste du fichier .env
-# On s'assure de chercher le .env dans le dossier racine du projet
-env_path = Path('.') / '.env'
+# 1. Chargement robuste du fichier .env (backend/.env)
+env_path = Path(__file__).resolve().parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
-# 2. Récupération de la clé API
-api_key = os.getenv("GOOGLE_API_KEY")
-if not api_key:
+# 2. Initialisation Vertex AI (variables chargées via dotenv)
+gcp_project_id = os.getenv("GCP_PROJECT_ID")
+gcp_location = os.getenv("GCP_LOCATION")
+if not gcp_project_id or not gcp_location:
     raise ValueError(
-        "ERREUR : La clé GOOGLE_API_KEY est introuvable.\n"
-        "Vérifie que ton fichier .env contient exactement : GOOGLE_API_KEY=ta_cle"
+        "ERREUR : Variables Vertex AI introuvables.\n"
+        "Vérifie que ton fichier .env contient : GCP_PROJECT_ID et GCP_LOCATION."
     )
 
-# 3. Initialisation du nouveau client Google GenAI (v2026)
-google_client = genai.Client(api_key=api_key)
+vertexai.init(project=gcp_project_id, location=gcp_location)
 
-# 4. Initialisation d'Instructor avec le nouveau mode 'STRUCTURED_OUTPUTS'
-client = instructor.from_genai(
-    client=google_client,
-    mode=instructor.Mode.GENAI_STRUCTURED_OUTPUTS,
-)
+
+def _vertex_client(model_id: str):
+    model = GenerativeModel(model_id)
+    return instructor.from_vertexai(
+        client=model,
+        mode=instructor.Mode.VERTEXAI_JSON,
+    )
 
 SYSTEM_PROMPT = """
 Tu es un expert en recrutement IT. 
@@ -70,7 +72,7 @@ EXIGENCES :
 def scorer_cv(texte_cv: str, fiche_poste: str) -> ScoreResult:
     """
     Compare un CV (texte) à une fiche de poste et retourne un score structuré.
-    Modèle par défaut : gemini-2.5-flash (surcharge possible via GEMINI_MODEL_SCORE si indisponible).
+    Modèle par défaut : gemini-2.5-flash (surcharge possible via GEMINI_MODEL_SCORE).
     """
     model_id = os.getenv("GEMINI_MODEL_SCORE", "gemini-2.5-flash")
 
@@ -81,6 +83,7 @@ def scorer_cv(texte_cv: str, fiche_poste: str) -> ScoreResult:
         f"{texte_cv.strip()}"
     )
 
+    client = _vertex_client(model_id)
     return client.chat.completions.create(
         model=model_id,
         config={
@@ -111,6 +114,7 @@ def extraire_cv(texte_brut: str, fiche_poste: str | None = None) -> ProfilCandid
             f"{fiche_poste.strip()}"
         )
 
+    client = _vertex_client(model_id)
     return client.chat.completions.create(
         model=model_id,
         config={

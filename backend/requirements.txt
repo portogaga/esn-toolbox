@@ -7,9 +7,10 @@ pymupdf==1.27.2
 instructor==1.15.1
 # requis à l’exécution par instructor (GenAI structured outputs), pas toujours déclaré en dépendance
 jsonref==1.1.0
-google-genai==1.72.0
 python-docx==1.2.0
 docxtpl==0.20.2
 python-multipart==0.0.20
 python-dotenv==1.2.2
 pydantic==2.12.5
+google-cloud-aiplatform
+
