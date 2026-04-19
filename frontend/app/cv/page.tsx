@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AlertTriangle, CheckCircle2, FileText, Upload } from "lucide-react";
 
 const API_BASE =
@@ -45,16 +45,54 @@ async function readErrorMessage(response: Response): Promise<string> {
   return response.statusText || `Erreur ${response.status}`;
 }
 
+const SIMULATED_PROGRESS_CAP = 95;
+const SIMULATION_DURATION_MS = 60_000;
+const SIMULATION_TICK_MS = 100;
+const PROGRESS_INCREMENT =
+  SIMULATED_PROGRESS_CAP / (SIMULATION_DURATION_MS / SIMULATION_TICK_MS);
+
+function statusMessageForProgress(p: number): string {
+  if (p < 20) return "Extraction des informations...";
+  if (p < 50) return "Analyse et structuration par l'IA Gemini...";
+  if (p < 80) return "Rédaction des missions au format ...";
+  if (p < 95) return "Finalisation du document Word...";
+  return "Finalisation du document Word...";
+}
+
 export default function CvGeneratorPage() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const progressIntervalRef = useRef<ReturnType<typeof setInterval> | null>(
+    null
+  );
+  const progressValueRef = useRef(0);
+  const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const [file, setFile] = useState<File | null>(null);
   const [fichePoste, setFichePoste] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [statusMessage, setStatusMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [templateType, setTemplateType] = useState<"detailed" | "simplified">(
     "detailed"
   );
+
+  const clearProgressSimulation = useCallback(() => {
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+      progressIntervalRef.current = null;
+    }
+    if (resetTimeoutRef.current) {
+      clearTimeout(resetTimeoutRef.current);
+      resetTimeoutRef.current = null;
+    }
+    progressValueRef.current = 0;
+  }, []);
+
+  useEffect(() => {
+    return () => clearProgressSimulation();
+  }, [clearProgressSimulation]);
 
   const clearFile = useCallback(() => {
     setFile(null);
@@ -105,9 +143,24 @@ export default function CvGeneratorPage() {
   };
 
   const handleGenerate = async () => {
-    if (!file || loading) return;
+    if (!file || isGenerating) return;
     setError(null);
-    setLoading(true);
+    clearProgressSimulation();
+
+    setIsGenerating(true);
+    progressValueRef.current = 0;
+    setProgress(0);
+    setStatusMessage(statusMessageForProgress(0));
+
+    progressIntervalRef.current = setInterval(() => {
+      progressValueRef.current = Math.min(
+        progressValueRef.current + PROGRESS_INCREMENT,
+        SIMULATED_PROGRESS_CAP
+      );
+      const p = progressValueRef.current;
+      setProgress(p);
+      setStatusMessage(statusMessageForProgress(p));
+    }, SIMULATION_TICK_MS);
 
     try {
       const formData = new FormData();
@@ -127,6 +180,11 @@ export default function CvGeneratorPage() {
 
       const blob = await response.blob();
 
+      clearProgressSimulation();
+
+      setProgress(100);
+      setStatusMessage("Terminé !");
+
       const fromHeader = parseFilenameFromDisposition(
         response.headers.get("Content-Disposition")
       );
@@ -143,12 +201,21 @@ export default function CvGeneratorPage() {
       anchor.click();
       document.body.removeChild(anchor);
       window.URL.revokeObjectURL(url);
+
+      resetTimeoutRef.current = setTimeout(() => {
+        setIsGenerating(false);
+        setProgress(0);
+        setStatusMessage("");
+        resetTimeoutRef.current = null;
+      }, 2000);
     } catch (err) {
+      clearProgressSimulation();
+      setIsGenerating(false);
+      setProgress(0);
+      setStatusMessage("");
       const message =
         err instanceof Error ? err.message : "Une erreur inattendue s’est produite.";
       setError(message);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -263,7 +330,7 @@ export default function CvGeneratorPage() {
               rows={6}
               value={fichePoste}
               onChange={(e) => setFichePoste(e.target.value)}
-              disabled={loading}
+              disabled={isGenerating}
               placeholder="Collez ici le descriptif de poste, l’appel d’offres ou les compétences clés attendues…"
               className="w-full resize-y rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm leading-relaxed text-zinc-100 placeholder:text-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 disabled:cursor-not-allowed disabled:opacity-60"
             />
@@ -285,7 +352,7 @@ export default function CvGeneratorPage() {
             </div>
           )}
 
-          <fieldset className="mt-8" disabled={loading}>
+          <fieldset className="mt-8" disabled={isGenerating}>
             <legend className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
               Modèle Word
             </legend>
@@ -392,64 +459,43 @@ export default function CvGeneratorPage() {
             </div>
           </fieldset>
 
-          <div className="mt-6 flex flex-wrap items-center gap-4">
-            <button
-              type="button"
-              disabled={!file || loading}
-              onClick={handleGenerate}
-              className="inline-flex min-w-[220px] items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {loading ? (
-                <>
-                  <Spinner />
-                  Génération en cours…
-                </>
-              ) : (
-                "Générer le CV Maltem à Word"
-              )}
-            </button>
-          </div>
-
-          {loading && (
-            <p className="mt-4 text-center text-xs text-zinc-500">
-              Extraction du texte, analyse IA et rendu Word — merci de patienter.
-            </p>
+          {!isGenerating ? (
+            <div className="mt-6 flex flex-wrap items-center gap-4">
+              <button
+                type="button"
+                disabled={!file}
+                onClick={handleGenerate}
+                className="inline-flex min-w-[220px] items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Générer le CV Maltem à Word
+              </button>
+            </div>
+          ) : (
+            <div className="mt-6 space-y-4">
+              <p className="text-base font-semibold text-zinc-100">
+                {statusMessage}
+              </p>
+              <div
+                className="h-4 w-full overflow-hidden rounded-full bg-zinc-800 ring-1 ring-zinc-700/80"
+                role="progressbar"
+                aria-valuenow={Math.round(progress)}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="Progression de la génération"
+              >
+                <div
+                  className="h-full rounded-full bg-emerald-500 transition-[width] duration-300 ease-out"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <p className="text-sm leading-relaxed text-zinc-400">
+                ⏳ La génération du CV complet par l&apos;IA peut prendre
+                quelques minutes, merci de patienter.
+              </p>
+            </div>
           )}
-
-          <p className="mt-8 border-t border-zinc-800 pt-6 text-center text-[11px] text-zinc-500">
-            Endpoint :{" "}
-            <code className="rounded-lg border border-zinc-800 bg-zinc-900/80 px-2 py-1 font-mono text-zinc-400">
-              {API_URL}
-            </code>
-          </p>
         </section>
       </div>
     </div>
-  );
-}
-
-function Spinner() {
-  return (
-    <svg
-      className="h-5 w-5 animate-spin text-white"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      aria-hidden
-    >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-      />
-    </svg>
   );
 }
