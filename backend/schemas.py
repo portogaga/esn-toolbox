@@ -166,3 +166,12 @@ class ProfilCandidat(BaseModel):
     experiences: list[Experience] = Field(
         description="Expériences professionnelles ordonnées de la plus récente à la plus ancienne"
     )
+
+
+class ExtractCvWordParams(BaseModel):
+    """Paramètres du formulaire multipart pour la génération Word (/extract-cv), hors fichier PDF."""
+
+    template_type: str = Field(
+        default="detailed",
+        description="Type de modèle Word : 'detailed' (défaut) ou 'simplified'.",
+    )

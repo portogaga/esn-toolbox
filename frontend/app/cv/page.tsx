@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
-import { AlertTriangle, FileText, Upload } from "lucide-react";
+import { AlertTriangle, CheckCircle2, FileText, Upload } from "lucide-react";
 
 const API_BASE =
   process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
@@ -52,6 +52,9 @@ export default function CvGeneratorPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
+  const [templateType, setTemplateType] = useState<"detailed" | "simplified">(
+    "detailed"
+  );
 
   const clearFile = useCallback(() => {
     setFile(null);
@@ -110,6 +113,7 @@ export default function CvGeneratorPage() {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("fiche_poste", fichePoste);
+      formData.append("template_type", templateType);
 
       const response = await fetch(API_URL, {
         method: "POST",
@@ -280,6 +284,113 @@ export default function CvGeneratorPage() {
               </div>
             </div>
           )}
+
+          <fieldset className="mt-8" disabled={loading}>
+            <legend className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
+              Modèle Word
+            </legend>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <button
+                type="button"
+                role="radio"
+                aria-checked={templateType === "detailed"}
+                onClick={() => setTemplateType("detailed")}
+                className={[
+                  "relative flex w-full flex-col rounded-2xl border-2 p-5 text-left transition focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:ring-offset-2 focus:ring-offset-zinc-950",
+                  templateType === "detailed"
+                    ? "border-emerald-500 bg-emerald-50"
+                    : "border-zinc-700 bg-zinc-900/40 hover:border-zinc-600",
+                ].join(" ")}
+              >
+                {templateType === "detailed" && (
+                  <CheckCircle2
+                    className="absolute right-4 top-4 h-6 w-6 text-emerald-600"
+                    aria-hidden
+                  />
+                )}
+                <span
+                  className={
+                    templateType === "detailed"
+                      ? "pr-10 text-base font-semibold text-zinc-900"
+                      : "pr-2 text-base font-semibold text-zinc-100"
+                  }
+                >
+                  Format Détaillé
+                </span>
+                <p
+                  className={
+                    templateType === "detailed"
+                      ? "mt-2 text-sm text-zinc-700"
+                      : "mt-2 text-sm text-zinc-400"
+                  }
+                >
+                  Idéal pour profils seniors et AO.
+                </p>
+                <ul
+                  className={
+                    templateType === "detailed"
+                      ? "mt-4 list-inside list-disc space-y-1.5 text-sm text-zinc-800"
+                      : "mt-4 list-inside list-disc space-y-1.5 text-sm text-zinc-500"
+                  }
+                >
+                  <li>Contexte &amp; Enjeux</li>
+                  <li>Objectifs</li>
+                  <li>Réalisations</li>
+                  <li>Résultats</li>
+                </ul>
+              </button>
+
+              <button
+                type="button"
+                role="radio"
+                aria-checked={templateType === "simplified"}
+                onClick={() => setTemplateType("simplified")}
+                className={[
+                  "relative flex w-full flex-col rounded-2xl border-2 p-5 text-left transition focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:ring-offset-2 focus:ring-offset-zinc-950",
+                  templateType === "simplified"
+                    ? "border-emerald-500 bg-emerald-50"
+                    : "border-zinc-700 bg-zinc-900/40 hover:border-zinc-600",
+                ].join(" ")}
+              >
+                {templateType === "simplified" && (
+                  <CheckCircle2
+                    className="absolute right-4 top-4 h-6 w-6 text-emerald-600"
+                    aria-hidden
+                  />
+                )}
+                <span
+                  className={
+                    templateType === "simplified"
+                      ? "pr-10 text-base font-semibold text-zinc-900"
+                      : "pr-2 text-base font-semibold text-zinc-100"
+                  }
+                >
+                  Format Simplifié
+                </span>
+                <p
+                  className={
+                    templateType === "simplified"
+                      ? "mt-2 text-sm text-zinc-700"
+                      : "mt-2 text-sm text-zinc-400"
+                  }
+                >
+                  Format punchy qui va droit au but.
+                </p>
+                <ul
+                  className={
+                    templateType === "simplified"
+                      ? "mt-4 list-inside list-disc space-y-1.5 text-sm text-zinc-800"
+                      : "mt-4 list-inside list-disc space-y-1.5 text-sm text-zinc-500"
+                  }
+                >
+                  <li>Allégé</li>
+                  <li>Rôle</li>
+                  <li>Missions concrètes</li>
+                  <li>Environnement</li>
+                </ul>
+              </button>
+            </div>
+          </fieldset>
 
           <div className="mt-6 flex flex-wrap items-center gap-4">
             <button

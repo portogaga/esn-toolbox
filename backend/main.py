@@ -2,7 +2,7 @@ import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from starlette.background import BackgroundTask
@@ -16,13 +16,24 @@ from schemas import (
     ComparateurRequest,
     TACERequest,
     SplitContractRequest,
+    ExtractCvWordParams,
 )
 from word_service import generer_word
 
 BASE_DIR = Path(__file__).resolve().parent
 TEMP_UPLOADS = BASE_DIR / "temp_uploads"
 TEMP_OUTPUTS = BASE_DIR / "temp_outputs"
-TEMPLATE_CV_PATH = BASE_DIR / "templates" / "template_maltem.docx"
+TEMPLATE_CV_DETAILED = BASE_DIR / "templates" / "template_maltem.docx"
+TEMPLATE_CV_SIMPLIFIED = BASE_DIR / "templates" / "template_maltem simplified.docx"
+
+
+def get_extract_cv_word_params(
+    template_type: str = Form(
+        "detailed",
+        description="Type de modèle Word : 'detailed' (défaut) ou 'simplified'.",
+    ),
+) -> ExtractCvWordParams:
+    return ExtractCvWordParams(template_type=template_type)
 
 
 @asynccontextmanager
@@ -369,6 +380,7 @@ def calcul_split_contract(data: SplitContractRequest):
 async def extract_cv(
     file: UploadFile = File(..., description="CV au format PDF"),
     fiche_poste: str = Form("", description="Fiche de poste optionnelle pour orienter le CV"),
+    word_params: ExtractCvWordParams = Depends(get_extract_cv_word_params),
 ):
     """
     Lit le PDF, extrait le texte, appelle l'IA pour structurer le profil, génère le document Word.
@@ -406,12 +418,6 @@ async def extract_cv(
             detail="Impossible d'extraire du texte du PDF (fichier illisible ou corrompu).",
         )
 
-    if not TEMPLATE_CV_PATH.is_file():
-        raise HTTPException(
-            status_code=500,
-            detail="Modèle Word introuvable sur le serveur (templates/template_maltem.docx).",
-        )
-
     try:
         from llm_service import extraire_cv
 
@@ -424,8 +430,19 @@ async def extract_cv(
             detail=f"Erreur lors de l'appel à l'IA : {e}",
         ) from e
 
+    template_path = (
+        TEMPLATE_CV_SIMPLIFIED
+        if word_params.template_type == "simplified"
+        else TEMPLATE_CV_DETAILED
+    )
+    if not template_path.is_file():
+        raise HTTPException(
+            status_code=500,
+            detail=f"Modèle Word introuvable sur le serveur ({template_path.relative_to(BASE_DIR)}).",
+        )
+
     try:
-        generer_word(profil, str(TEMPLATE_CV_PATH), str(output_path))
+        generer_word(profil, str(template_path), str(output_path))
     except Exception as e:
         output_path.unlink(missing_ok=True)
         raise HTTPException(
