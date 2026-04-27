@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
 import { X } from "lucide-react";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
-const apiUrl = (path: string) => `${API_BASE_URL}${path}`;
+import { apiUrl } from "@/lib/apiBaseUrl";
 
 export default function ModalProspection({ isOpen, onClose, onSuccess, currentSemaineId, existingCommerciaux, existingComptes }: any) {
   const [commercial, setCommercial] = useState("");

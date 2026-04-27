@@ -83,18 +83,6 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
         <div className="inline-flex rounded-full border border-zinc-700/80 bg-zinc-900/80 p-1 text-xs">
           <button
             type="button"
-            onClick={() => setCurrency("EUR")}
-            className={`flex items-center gap-1 rounded-full px-3 py-1.5 transition ${
-              currency === "EUR"
-                ? "bg-indigo-500 text-zinc-50 shadow-sm"
-                : "text-zinc-400 hover:text-zinc-100"
-            }`}
-          >
-            <span>€</span>
-            <span className="hidden sm:inline">EUR</span>
-          </button>
-          <button
-            type="button"
             onClick={() => setCurrency("MAD")}
             className={`flex items-center gap-1 rounded-full px-3 py-1.5 transition ${
               currency === "MAD"
@@ -104,6 +92,18 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
           >
             <span>DH</span>
             <span className="hidden sm:inline">MAD</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setCurrency("EUR")}
+            className={`flex items-center gap-1 rounded-full px-3 py-1.5 transition ${
+              currency === "EUR"
+                ? "bg-indigo-500 text-zinc-50 shadow-sm"
+                : "text-zinc-400 hover:text-zinc-100"
+            }`}
+          >
+            <span>€</span>
+            <span className="hidden sm:inline">EUR</span>
           </button>
         </div>
       </div>

@@ -110,17 +110,6 @@ export default function Home() {
           <div className="inline-flex rounded-full border border-zinc-700/80 bg-zinc-900/80 p-1 text-xs">
             <button
               type="button"
-              onClick={() => setCurrency("EUR")}
-              className={`rounded-full px-3 py-1.5 transition ${
-                currency === "EUR"
-                  ? "bg-emerald-500 text-zinc-950 shadow"
-                  : "text-zinc-400 hover:text-zinc-100"
-              }`}
-            >
-              € EUR
-            </button>
-            <button
-              type="button"
               onClick={() => setCurrency("MAD")}
               className={`rounded-full px-3 py-1.5 transition ${
                 currency === "MAD"
@@ -129,6 +118,17 @@ export default function Home() {
               }`}
             >
               DH MAD
+            </button>
+            <button
+              type="button"
+              onClick={() => setCurrency("EUR")}
+              className={`rounded-full px-3 py-1.5 transition ${
+                currency === "EUR"
+                  ? "bg-emerald-500 text-zinc-950 shadow"
+                  : "text-zinc-400 hover:text-zinc-100"
+              }`}
+            >
+              € EUR
             </button>
           </div>
         </div>

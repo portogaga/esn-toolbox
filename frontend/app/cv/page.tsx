@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AlertTriangle, CheckCircle2, FileText, Upload } from "lucide-react";
+import { apiUrl } from "@/lib/apiBaseUrl";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
-const API_URL = `${API_BASE.replace(/\/$/, "")}/extract-cv`;
+const API_URL = apiUrl("/extract-cv");
 
 function isPdfFile(file: File): boolean {
   if (!file.name.toLowerCase().endsWith(".pdf")) return false;

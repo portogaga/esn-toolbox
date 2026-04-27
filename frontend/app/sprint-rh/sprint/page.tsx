@@ -3,9 +3,7 @@
 import { useEffect, useState } from "react";
 import { Plus, CheckCircle2, ArrowRight, Save, X, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
-const apiUrl = (path: string) => `${API_BASE_URL}${path}`;
+import { apiUrl } from "@/lib/apiBaseUrl";
 
 export default function SprintPlanningWizard() {
   const router = useRouter();

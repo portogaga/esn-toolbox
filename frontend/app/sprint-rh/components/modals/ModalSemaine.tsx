@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
 import { X } from "lucide-react";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
-const apiUrl = (path: string) => `${API_BASE_URL}${path}`;
+import { apiUrl } from "@/lib/apiBaseUrl";
 
 export default function ModalSemaine({ isOpen, onClose, onSuccess }: any) {
   const currentWeek = Math.ceil(Math.floor((new Date().getTime() - new Date(new Date().getFullYear(), 0, 1).getTime()) / (24 * 60 * 60 * 1000)) / 7);

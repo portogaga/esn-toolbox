@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { AlertTriangle, BarChart3, Upload } from "lucide-react";
+import { apiUrl } from "@/lib/apiBaseUrl";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
-const API_SCORE_URL = `${API_BASE.replace(/\/$/, "")}/score-cvs`;
+const API_SCORE_URL = apiUrl("/score-cvs");
 
 export type ScoreResultApi = {
   nom_candidat: string;

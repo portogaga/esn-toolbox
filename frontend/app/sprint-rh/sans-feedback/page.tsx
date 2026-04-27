@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { CheckCircle2, XCircle, HelpCircle, Clock, AlertCircle } from "lucide-react";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
-const apiUrl = (path: string) => `${API_BASE_URL}${path}`;
+import { apiUrl } from "@/lib/apiBaseUrl";
 
 export default function SansFeedbackPage() {
   const [profils, setProfils] = useState<any[]>([]);

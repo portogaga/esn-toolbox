@@ -6,9 +6,7 @@ import { useRouter } from "next/navigation";
 import ModalBesoin from "../components/modals/ModalBesoin";
 import ModalProfil from "../components/modals/ModalProfil";
 import ModalClosing from "../components/modals/ModalClosing";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
-const apiUrl = (path: string) => `${API_BASE_URL}${path}`;
+import { apiUrl } from "@/lib/apiBaseUrl";
 
 export default function DailyPage() {
   const router = useRouter();

@@ -2,10 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Briefcase, CheckCircle2, Plus, RefreshCw } from "lucide-react";
+import { apiUrl } from "@/lib/apiBaseUrl";
 
 type BizStatus = "envoye_client" | "ko" | "hiring";
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
-const apiUrl = (path: string) => `${API_BASE_URL}${path}`;
 
 export default function BusinessPage() {
   const [semaines, setSemaines] = useState<any[]>([]);

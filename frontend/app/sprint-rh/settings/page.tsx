@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Plus, Trash2, CheckCircle2 } from "lucide-react";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
-const apiUrl = (path: string) => `${API_BASE_URL}${path}`;
+import { apiUrl } from "@/lib/apiBaseUrl";
 
 export default function SettingsPage() {
   const [collaborateurs, setCollaborateurs] = useState<any[]>([]);

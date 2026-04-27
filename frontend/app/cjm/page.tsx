@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { AlertTriangle, Zap } from "lucide-react";
 import { useCurrency } from "../context/CurrencyContext";
+import { getApiBaseUrl } from "@/lib/apiBaseUrl";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+const API_BASE = getApiBaseUrl();
 
 function formatEuro(value: number | null | undefined) {
   if (value === null || value === undefined || Number.isNaN(value)) return "—";

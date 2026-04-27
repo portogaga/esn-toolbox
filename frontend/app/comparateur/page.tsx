@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { Scale, User, Building2, AlertTriangle } from "lucide-react";
 import { useCurrency } from "../context/CurrencyContext";
+import { getApiBaseUrl } from "@/lib/apiBaseUrl";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+const API_BASE = getApiBaseUrl();
 
 type ComparateurResult = {
   ca_total: number;

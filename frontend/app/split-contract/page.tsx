@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { AlertTriangle, PieChart } from "lucide-react";
+import { getApiBaseUrl } from "@/lib/apiBaseUrl";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+const API_BASE = getApiBaseUrl();
 
 type SplitContractResult = {
   cjm: number;

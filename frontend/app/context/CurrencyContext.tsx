@@ -19,7 +19,7 @@ const CurrencyContext = createContext<CurrencyContextValue | undefined>(
 );
 
 export function CurrencyProvider({ children }: { children: ReactNode }) {
-  const [currency, setCurrency] = useState<Currency>("EUR");
+  const [currency, setCurrency] = useState<Currency>("MAD");
 
   return (
     <CurrencyContext.Provider value={{ currency, setCurrency }}>

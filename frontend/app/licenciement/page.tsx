@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { UserMinus, FileText, Scale, AlertTriangle } from "lucide-react";
 import { useCurrency } from "../context/CurrencyContext";
+import { getApiBaseUrl } from "@/lib/apiBaseUrl";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+const API_BASE = getApiBaseUrl();
 
 type LicenciementResult = {
   indemnite_legale_nette: number;
@@ -31,7 +32,7 @@ export default function LicenciementPage() {
   const [moisPreavis, setMoisPreavis] = useState("3");
   const [joursCpRestants, setJoursCpRestants] = useState("");
   const [licenciementAbusif, setLicenciementAbusif] = useState(false);
-  const [legalCountry, setLegalCountry] = useState<"FR" | "MA">("FR");
+  const [legalCountry, setLegalCountry] = useState<"FR" | "MA">("MA");
   const [licenciementResult, setLicenciementResult] =
     useState<LicenciementResult | null>(null);
   const [licenciementLoading, setLicenciementLoading] = useState(false);
@@ -118,7 +119,7 @@ export default function LicenciementPage() {
               </div>
               <div>
                 <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-400">
-                  Coût de Licenciement (France)
+                  Coût de Licenciement ({legalCountry === "MA" ? "Maroc" : "France"})
                 </h2>
                 <p className="text-xs text-zinc-500">
                   Estimation indicative basée sur l&apos;indemnité légale et le préavis chargé.
@@ -126,17 +127,6 @@ export default function LicenciementPage() {
               </div>
             </div>
             <div className="inline-flex rounded-full border border-zinc-700/80 bg-zinc-900/80 p-1 text-xs">
-              <button
-                type="button"
-                onClick={() => setLegalCountry("FR")}
-                className={`rounded-full px-3 py-1.5 transition ${
-                  legalCountry === "FR"
-                    ? "bg-zinc-100 text-zinc-900"
-                    : "text-zinc-400 hover:text-zinc-100"
-                }`}
-              >
-                🇫🇷 France
-              </button>
               <button
                 type="button"
                 onClick={() => setLegalCountry("MA")}
@@ -147,6 +137,17 @@ export default function LicenciementPage() {
                 }`}
               >
                 🇲🇦 Maroc
+              </button>
+              <button
+                type="button"
+                onClick={() => setLegalCountry("FR")}
+                className={`rounded-full px-3 py-1.5 transition ${
+                  legalCountry === "FR"
+                    ? "bg-zinc-100 text-zinc-900"
+                    : "text-zinc-400 hover:text-zinc-100"
+                }`}
+              >
+                🇫🇷 France
               </button>
             </div>
           </div>
