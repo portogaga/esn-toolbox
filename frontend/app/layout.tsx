@@ -31,17 +31,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  const isClerkEnabled = Boolean(clerkPublishableKey);
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-950 text-zinc-50`}
       >
-        <ClerkProvider afterSignOutUrl="/">
-          <AuthHeader />
+        {isClerkEnabled ? (
+          <ClerkProvider afterSignOutUrl="/">
+            <AuthHeader />
+            <CurrencyProvider>
+              <AppShell>{children}</AppShell>
+            </CurrencyProvider>
+          </ClerkProvider>
+        ) : (
           <CurrencyProvider>
             <AppShell>{children}</AppShell>
           </CurrencyProvider>
-        </ClerkProvider>
+        )}
       </body>
     </html>
   );

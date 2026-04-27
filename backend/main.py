@@ -19,6 +19,7 @@ from schemas import (
     ExtractCvWordParams,
 )
 from word_service import generer_word
+from routers import sprint_rh
 
 BASE_DIR = Path(__file__).resolve().parent
 TEMP_UPLOADS = BASE_DIR / "temp_uploads"
@@ -56,6 +57,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(sprint_rh.router)
 
 # --- OUTIL 1 bis : CALCULATEUR DE CJM RAPIDE (FR/MA) ---
 @app.post("/calcul-cjm-rapide")

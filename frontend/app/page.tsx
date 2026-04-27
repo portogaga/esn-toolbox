@@ -79,6 +79,13 @@ const TOOLS = [
     icon: PieChart,
     accent: "emerald",
   },
+  {
+    href: "/sprint-rh",
+    name: "Sprint RH",
+    description: "Gérez votre sprint planning, dailies, et récaps de recrutement.",
+    icon: Activity,
+    accent: "indigo",
+  },
 ] as const;
 
 const accentClasses: Record<string, string> = {
