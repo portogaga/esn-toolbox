@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
-import { LayoutDashboard, Calendar, CheckSquare, Clock, HelpCircle, Settings, FileText, Briefcase, Users } from "lucide-react";
+import { LayoutDashboard, Calendar, CheckSquare, Clock, HelpCircle, Settings, FileText, Briefcase, Users, Info } from "lucide-react";
 
 export default function SprintRHLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -49,6 +49,17 @@ export default function SprintRHLayout({ children }: { children: ReactNode }) {
             );
           })}
           </div>
+        </div>
+      </div>
+      <div className="border-b border-sky-500/20 bg-sky-500/5">
+        <div className="mx-auto flex max-w-7xl items-start gap-3 px-4 py-3 sm:px-6 lg:px-8">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-sky-400" aria-hidden />
+          <p className="text-xs leading-relaxed text-sky-100/90 sm:text-sm">
+            <span className="font-medium text-sky-200">Espace partagé.</span> Tous les comptes connectés (Clerk) voient les
+            mêmes sprints, besoins et collaborateurs : une seule base de données côté serveur. Si un compte affiche un
+            tableau vide, vérifie la même URL d&apos;API et le même projet Supabase que le reste de l&apos;équipe — ce
+            n&apos;est pas une base par utilisateur.
+          </p>
         </div>
       </div>
       <main className="mx-auto w-full max-w-7xl p-4 sm:p-6 lg:p-8">
