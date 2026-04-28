@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, LineChart } from "lucide-react"; // J'ai ajouté l'icône du logo
+import { Menu } from "lucide-react";
 import { Footer } from "./Footer";
 import { Sidebar } from "./Sidebar";
 
@@ -15,12 +15,11 @@ function TopBar({ onMenuClick }: { onMenuClick: () => void }) {
         href="/"
         className="flex items-center gap-2 transition-opacity hover:opacity-80"
       >
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-emerald-500/20 bg-emerald-500/10 text-emerald-500">
-          <LineChart className="h-5 w-5" />
-        </div>
-        <span className="text-base font-semibold text-zinc-100">
-          ESN Toolbox
-        </span>
+        <img
+          src="/maltem-africa-logo.png"
+          alt="Maltem Africa"
+          className="h-8 w-auto object-contain"
+        />
       </Link>
 
       {/* Menu Burger (inchangé) */}

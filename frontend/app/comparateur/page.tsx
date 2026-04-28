@@ -112,13 +112,13 @@ export default function ComparateurPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900">
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-zinc-50 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-zinc-900 sm:text-3xl">
             Aide à la Décision : CDI vs Sous-traitance
           </h1>
-          <p className="mt-2 max-w-2xl text-base text-zinc-400">
+          <p className="mt-2 max-w-2xl text-base text-zinc-600">
             Sécurisez votre stratégie de staffing. Comparez la rentabilité nette d&apos;un recrutement
             interne face au recours à un prestataire freelance sur la durée exacte de votre projet.
           </p>
@@ -127,14 +127,14 @@ export default function ComparateurPage() {
         <section className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6 shadow-xl sm:p-8">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-700/80 bg-zinc-900/80">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-700/80 bg-slate-50">
                 <Scale className="h-5 w-5 text-sky-400" />
               </div>
               <div>
-                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-600">
                   Comparateur : Recrutement CDI vs Sous-traitance Freelance
                 </h2>
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs text-zinc-9000">
                   Comparez, sur une mission donnée, l&apos;impact financier de chaque scénario.
                 </p>
               </div>
@@ -143,10 +143,10 @@ export default function ComparateurPage() {
 
           <div className="grid gap-6 sm:grid-cols-2">
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 <span>
                   TJM{" "}
-                  <span className="ml-1 text-xs font-normal text-zinc-500">
+                  <span className="ml-1 text-xs font-normal text-zinc-9000">
                     (facturé)
                   </span>
                 </span>
@@ -161,11 +161,11 @@ export default function ComparateurPage() {
                   setComparateurError(null);
                 }}
                 placeholder="ex. 650"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Durée de la mission (mois)
               </label>
               <input
@@ -178,11 +178,11 @@ export default function ComparateurPage() {
                   setComparateurError(null);
                 }}
                 placeholder="ex. 12"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 TJF Freelance demandé
               </label>
               <input
@@ -195,11 +195,11 @@ export default function ComparateurPage() {
                   setComparateurError(null);
                 }}
                 placeholder="ex. 500"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Salaire Brut Mensuel CDI
               </label>
               <input
@@ -212,7 +212,7 @@ export default function ComparateurPage() {
                   setComparateurError(null);
                 }}
                 placeholder="ex. 4000"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
               />
             </div>
           </div>
@@ -237,7 +237,7 @@ export default function ComparateurPage() {
 
           {comparateurError && (
             <div
-              className="mt-4 flex items-start gap-2 rounded-xl border border-red-900/70 bg-red-950/40 px-4 py-3 text-sm text-red-200"
+              className="mt-4 flex items-start gap-2 rounded-xl border border-red-900/70 bg-red-950/40 px-4 py-3 text-sm text-red-700"
               role="alert"
             >
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
@@ -248,10 +248,10 @@ export default function ComparateurPage() {
           {comparateurResult && !comparateurError && (
             <div className="mt-6 space-y-4">
               <div className="flex items-baseline justify-between text-sm">
-                <span className="text-zinc-400">Chiffre d&apos;affaires total généré</span>
-                <span className="font-semibold text-zinc-100">
+                <span className="text-zinc-600">Chiffre d&apos;affaires total généré</span>
+                <span className="font-semibold text-zinc-800">
                   {formatEuro(comparateurResult.ca_total)} {currencySymbol}{" "}
-                  <span className="text-xs text-zinc-500">
+                  <span className="text-xs text-zinc-9000">
                     ({comparateurResult.jours_totaux} jours)
                   </span>
                 </span>
@@ -272,11 +272,11 @@ export default function ComparateurPage() {
                       }`}
                     >
                       <div className="mb-2 flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-600">
                           {isFreelance ? (
-                            <User className="h-3.5 w-3.5 text-zinc-300" />
+                            <User className="h-3.5 w-3.5 text-zinc-700" />
                           ) : (
-                            <Building2 className="h-3.5 w-3.5 text-zinc-300" />
+                            <Building2 className="h-3.5 w-3.5 text-zinc-700" />
                           )}
                           <span>{isFreelance ? "Option Freelance" : "Option CDI interne"}</span>
                         </div>
@@ -288,16 +288,16 @@ export default function ComparateurPage() {
                       </div>
                       <div className="space-y-1 font-mono text-[13px]">
                         <div className="flex items-center justify-between">
-                          <span className="text-zinc-400">Coût total</span>
-                          <span className="text-zinc-100">{formatEuro(data.cout_total)}</span>
+                          <span className="text-zinc-600">Coût total</span>
+                          <span className="text-zinc-800">{formatEuro(data.cout_total)}</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-zinc-400">Marge brute</span>
-                          <span className="text-zinc-100">{formatEuro(data.marge_brute)}</span>
+                          <span className="text-zinc-600">Marge brute</span>
+                          <span className="text-zinc-800">{formatEuro(data.marge_brute)}</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-zinc-400">Marge (%)</span>
-                          <span className="text-zinc-100">
+                          <span className="text-zinc-600">Marge (%)</span>
+                          <span className="text-zinc-800">
                             {formatPct(data.marge_pourcent)}
                           </span>
                         </div>

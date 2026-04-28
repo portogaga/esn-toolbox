@@ -98,13 +98,13 @@ export default function LicenciementPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900">
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-zinc-50 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-zinc-900 sm:text-3xl">
             Provisionnement des Risques RH
           </h1>
-          <p className="mt-2 max-w-2xl text-base text-zinc-400">
+          <p className="mt-2 max-w-2xl text-base text-zinc-600">
             Anticipez les coûts de sortie de vos collaborateurs. Évaluez précisément les indemnités
             légales de licenciement et provisionnez le risque prud&apos;homal selon le cadre juridique
             en vigueur.
@@ -114,26 +114,26 @@ export default function LicenciementPage() {
         <section className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6 shadow-xl sm:p-8">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-700/80 bg-zinc-900/80">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-700/80 bg-slate-50">
                 <UserMinus className="h-5 w-5 text-red-400" />
               </div>
               <div>
-                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-600">
                   Coût de Licenciement ({legalCountry === "MA" ? "Maroc" : "France"})
                 </h2>
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs text-zinc-9000">
                   Estimation indicative basée sur l&apos;indemnité légale et le préavis chargé.
                 </p>
               </div>
             </div>
-            <div className="inline-flex rounded-full border border-zinc-700/80 bg-zinc-900/80 p-1 text-xs">
+            <div className="inline-flex rounded-full border border-zinc-700/80 bg-slate-50 p-1 text-xs">
               <button
                 type="button"
                 onClick={() => setLegalCountry("MA")}
                 className={`rounded-full px-3 py-1.5 transition ${
                   legalCountry === "MA"
                     ? "bg-zinc-100 text-zinc-900"
-                    : "text-zinc-400 hover:text-zinc-100"
+                    : "text-zinc-600 hover:text-zinc-800"
                 }`}
               >
                 🇲🇦 Maroc
@@ -144,7 +144,7 @@ export default function LicenciementPage() {
                 className={`rounded-full px-3 py-1.5 transition ${
                   legalCountry === "FR"
                     ? "bg-zinc-100 text-zinc-900"
-                    : "text-zinc-400 hover:text-zinc-100"
+                    : "text-zinc-600 hover:text-zinc-800"
                 }`}
               >
                 🇫🇷 France
@@ -154,7 +154,7 @@ export default function LicenciementPage() {
 
           <div className="grid gap-6 sm:grid-cols-3">
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Salaire Brut Mensuel
               </label>
               <input
@@ -167,11 +167,11 @@ export default function LicenciementPage() {
                   setLicenciementError(null);
                 }}
                 placeholder="ex. 4000"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Ancienneté (années, ex : 2.5)
               </label>
               <input
@@ -184,11 +184,11 @@ export default function LicenciementPage() {
                   setLicenciementError(null);
                 }}
                 placeholder="ex. 3.5"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Mois de préavis
               </label>
               <input
@@ -201,11 +201,11 @@ export default function LicenciementPage() {
                   setLicenciementError(null);
                 }}
                 placeholder="3"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Congés payés restants (jours)
               </label>
               <input
@@ -218,7 +218,7 @@ export default function LicenciementPage() {
                   setLicenciementError(null);
                 }}
                 placeholder="ex. 5"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/30"
               />
             </div>
           </div>
@@ -246,7 +246,7 @@ export default function LicenciementPage() {
               className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[11px] font-medium transition ${
                 licenciementAbusif
                   ? "border-rose-500/70 bg-rose-950/40 text-rose-200"
-                  : "border-zinc-700/80 bg-zinc-950/60 text-zinc-300 hover:border-zinc-500"
+                  : "border-zinc-700/80 bg-zinc-950/60 text-zinc-700 hover:border-zinc-500"
               }`}
             >
               <span
@@ -275,7 +275,7 @@ export default function LicenciementPage() {
 
           {licenciementError && (
             <div
-              className="mt-4 flex items-start gap-2 rounded-xl border border-red-900/70 bg-red-950/40 px-4 py-3 text-sm text-red-200"
+              className="mt-4 flex items-start gap-2 rounded-xl border border-red-900/70 bg-red-950/40 px-4 py-3 text-sm text-red-700"
               role="alert"
             >
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
@@ -286,8 +286,8 @@ export default function LicenciementPage() {
           {licenciementResult && !licenciementError && (
             <div className="mt-6 rounded-2xl border border-zinc-700/80 bg-zinc-950/90 p-5 text-sm shadow-inner shadow-black/40">
               <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500">
-                  <FileText className="h-3.5 w-3.5 text-zinc-400" />
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-9000">
+                  <FileText className="h-3.5 w-3.5 text-zinc-600" />
                   <span>Facture de licenciement — simulation</span>
                 </div>
                 {ancienneteAnnees &&
@@ -300,30 +300,30 @@ export default function LicenciementPage() {
               </div>
               <div className="divide-y divide-zinc-800 border-y border-zinc-800 font-mono text-[13px]">
                 <div className="flex items-center justify-between py-2">
-                  <span className="text-zinc-400">Indemnité légale (net salarié)</span>
-                  <span className="text-zinc-100">
+                  <span className="text-zinc-600">Indemnité légale (net salarié)</span>
+                  <span className="text-zinc-800">
                     {formatEuro(licenciementResult.indemnite_legale_nette)} {currencySymbol}
                   </span>
                 </div>
                 <div className="flex items-center justify-between py-2">
-                  <span className="text-zinc-400">
+                  <span className="text-zinc-600">
                     Préavis payé dispensé (charges patronales incluses)
                   </span>
-                  <span className="text-zinc-100">
+                  <span className="text-zinc-800">
                     {formatEuro(licenciementResult.cout_preavis_total)} {currencySymbol}
                   </span>
                 </div>
                 <div className="flex items-center justify-between py-2">
-                  <span className="text-zinc-400">
+                  <span className="text-zinc-600">
                     Congés payés non pris (ICCP + charges)
                   </span>
-                  <span className="text-zinc-100">
+                  <span className="text-zinc-800">
                     {formatEuro(licenciementResult.cout_iccp_total)} {currencySymbol}
                   </span>
                 </div>
                 {licenciementResult.risque_prudhommes_max > 0 && (
                   <div className="flex items-center justify-between py-2">
-                    <span className="inline-flex items-center gap-1 text-zinc-400">
+                    <span className="inline-flex items-center gap-1 text-zinc-600">
                       <Scale className="h-3.5 w-3.5 text-rose-400" />
                       <span>Risque Prud&apos;homal max (Barème Macron)</span>
                     </span>
@@ -334,7 +334,7 @@ export default function LicenciementPage() {
                 )}
               </div>
               <div className="mt-3 flex items-center justify-between">
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-9000">
                   COÛT TOTAL À PROVISIONNER
                 </span>
                 <span className="text-2xl font-extrabold text-rose-500 sm:text-3xl">

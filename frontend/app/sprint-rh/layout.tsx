@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
-import { LayoutDashboard, Calendar, CheckSquare, Clock, HelpCircle, Settings, FileText, Briefcase, Users, Info } from "lucide-react";
+import { LayoutDashboard, Calendar, CheckSquare, Clock, HelpCircle, Settings, FileText, Briefcase, Users } from "lucide-react";
 
 export default function SprintRHLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -20,13 +20,13 @@ export default function SprintRHLayout({ children }: { children: ReactNode }) {
   ];
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-zinc-950 text-zinc-100">
-      <div className="sticky top-0 z-30 border-b border-white/10 bg-zinc-950/75 backdrop-blur-xl">
+    <div className="min-h-[calc(100vh-3.5rem)] bg-zinc-50 text-zinc-900">
+      <div className="sticky top-0 z-30 border-b border-zinc-200 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-[11px] uppercase tracking-[0.18em] text-zinc-500">Pilotage RH</p>
-              <h1 className="text-lg font-semibold text-zinc-100 sm:text-xl">Sprint RH Workspace</h1>
+              <h1 className="text-lg font-semibold text-zinc-900 sm:text-xl">Maltem OPS Dashboard</h1>
             </div>
           </div>
           <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
@@ -40,7 +40,7 @@ export default function SprintRHLayout({ children }: { children: ReactNode }) {
                 className={`inline-flex items-center gap-2 whitespace-nowrap rounded-xl border px-3 py-2 text-sm font-medium transition ${
                   isActive
                     ? "border-sky-400/40 bg-sky-500/10 text-sky-300"
-                    : "border-white/10 bg-zinc-900/70 text-zinc-400 hover:border-white/20 hover:bg-zinc-800/80 hover:text-zinc-200"
+                    : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 hover:bg-slate-50 hover:text-zinc-900"
                 }`}
               >
                 <Icon className={`h-4 w-4 ${isActive ? "text-sky-300" : "text-zinc-500"}`} />
@@ -49,17 +49,6 @@ export default function SprintRHLayout({ children }: { children: ReactNode }) {
             );
           })}
           </div>
-        </div>
-      </div>
-      <div className="border-b border-sky-500/20 bg-sky-500/5">
-        <div className="mx-auto flex max-w-7xl items-start gap-3 px-4 py-3 sm:px-6 lg:px-8">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-sky-400" aria-hidden />
-          <p className="text-xs leading-relaxed text-sky-100/90 sm:text-sm">
-            <span className="font-medium text-sky-200">Espace partagé.</span> Tous les comptes connectés (Clerk) voient les
-            mêmes sprints, besoins et collaborateurs : une seule base de données côté serveur. Si un compte affiche un
-            tableau vide, vérifie la même URL d&apos;API et le même projet Supabase que le reste de l&apos;équipe — ce
-            n&apos;est pas une base par utilisateur.
-          </p>
         </div>
       </div>
       <main className="mx-auto w-full max-w-7xl p-4 sm:p-6 lg:p-8">

@@ -80,11 +80,11 @@ export default function SplitContractPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900">
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         {backendOffline && (
           <p
-            className="mb-6 rounded-xl border border-amber-900/60 bg-amber-950/40 px-4 py-2.5 text-center text-sm text-amber-200/90"
+            className="mb-6 rounded-xl border border-amber-900/60 bg-amber-50 px-4 py-2.5 text-center text-sm text-amber-700"
             role="status"
           >
             Serveur de calcul hors ligne.
@@ -92,10 +92,10 @@ export default function SplitContractPage() {
         )}
 
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-zinc-50 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-zinc-900 sm:text-3xl">
             Déclaration Partielle &amp; Facturation B2B
           </h1>
-          <p className="mt-2 max-w-2xl text-base text-zinc-400">
+          <p className="mt-2 max-w-2xl text-base text-zinc-600">
             Optimisez le portage salarial de vos experts au Maroc. Ce module calcule la répartition
             financière idéale entre un contrat local sécurisé (CNSS/AMO) et une facturation
             offshore, afin de maximiser le revenu net du consultant.
@@ -105,11 +105,11 @@ export default function SplitContractPage() {
         <section className="mt-4 rounded-3xl border border-zinc-800 bg-zinc-950 p-6 shadow-xl sm:p-8">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-700/80 bg-zinc-900/80">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-700/80 bg-slate-50">
                 <PieChart className="h-5 w-5 text-emerald-400" />
               </div>
               <div>
-                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-600">
                   Déclaration Partielle &amp; Facturation B2B
                 </h2>
                 <p className="text-xs font-medium text-amber-300">
@@ -118,7 +118,7 @@ export default function SplitContractPage() {
               </div>
             </div>
           </div>
-          <p className="mb-6 max-w-2xl text-sm text-zinc-400">
+          <p className="mb-6 max-w-2xl text-sm text-zinc-600">
             Ce montage hybride permet de garantir une couverture sociale locale (CNSS, AMO) via un
             contrat de travail, tout en percevant le solde du budget sous forme de prestation de
             services B2B. Une approche idéale pour maximiser le revenu net.
@@ -126,7 +126,7 @@ export default function SplitContractPage() {
 
           <div className="grid gap-6 sm:grid-cols-2">
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 CJM / PRJ / Coût journalier CDI
               </label>
               <input
@@ -137,11 +137,11 @@ export default function SplitContractPage() {
                   setSplitError(null);
                 }}
                 placeholder="ex. 5500"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Salaire net à déclarer (CDI)
               </label>
               <select
@@ -150,7 +150,7 @@ export default function SplitContractPage() {
                   setNetDeclare(e.target.value);
                   setSplitError(null);
                 }}
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-xs text-zinc-100 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-xs text-zinc-800 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               >
                 {["6000", "7000", "8000", "9000", "10000", "12000", "14000", "20000"].map(
                   (v) => (
@@ -183,7 +183,7 @@ export default function SplitContractPage() {
 
           {splitError && (
             <div
-              className="mt-4 flex items-start gap-2 rounded-xl border border-red-900/70 bg-red-950/40 px-4 py-3 text-sm text-red-200"
+              className="mt-4 flex items-start gap-2 rounded-xl border border-red-900/70 bg-red-950/40 px-4 py-3 text-sm text-red-700"
               role="alert"
             >
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
@@ -193,25 +193,25 @@ export default function SplitContractPage() {
 
           {splitResult && !splitError && (
             <div className="mt-6 space-y-4">
-              <div className="space-y-2 rounded-2xl border border-zinc-700/80 bg-zinc-950/80 p-4 text-sm font-mono text-[13px]">
+              <div className="space-y-2 rounded-2xl border border-zinc-700/80 bg-white p-4 text-sm font-mono text-[13px]">
                 <div className="flex items-center justify-between">
-                  <span className="text-zinc-400">
+                  <span className="text-zinc-600">
                     Budget mensuel (CJM × 21 jours)
                   </span>
-                  <span className="text-zinc-100">
+                  <span className="text-zinc-800">
                     {formatEuro(splitResult.budget_mensuel_total)} MAD
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-zinc-400">Coût total de la déclaration CDI</span>
-                  <span className="text-zinc-100">
+                  <span className="text-zinc-600">Coût total de la déclaration CDI</span>
+                  <span className="text-zinc-800">
                     {formatEuro(splitResult.cout_cdi)} MAD
                   </span>
                 </div>
               </div>
 
-              <div className="space-y-2 rounded-2xl border border-zinc-700/80 bg-zinc-900/50 p-4 text-xs text-zinc-300">
-                <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+              <div className="space-y-2 rounded-2xl border border-zinc-700/80 bg-zinc-900/50 p-4 text-xs text-zinc-700">
+                <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-9000">
                   Détails de la paie locale (Pour info)
                 </p>
                 <div className="flex items-center justify-between">

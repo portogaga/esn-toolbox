@@ -219,34 +219,34 @@ export default function CvGeneratorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900">
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-6 flex flex-wrap items-center justify-end gap-2">
           <Link
             href="/"
-            className="rounded-full border border-zinc-700/80 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 transition hover:border-zinc-600 hover:text-zinc-100"
+            className="rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-zinc-400 hover:text-zinc-900"
           >
             Accueil
           </Link>
           <Link
             href="/radar-talents"
-            className="rounded-full border border-zinc-700/80 bg-zinc-900/80 px-3 py-1.5 text-xs font-medium text-zinc-400 transition hover:border-emerald-500/40 hover:text-emerald-300"
+            className="rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-emerald-500/40 hover:text-emerald-700"
           >
             Radar à Talents
           </Link>
         </div>
 
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-zinc-50 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-zinc-900 sm:text-3xl">
             Maltemisation des CV Automatique
           </h1>
-          <p className="mt-2 max-w-2xl text-base text-zinc-400">
+          <p className="mt-2 max-w-2xl text-base text-zinc-600">
             Déposez un PDF de CV brut : extraction IA et document Word structuré au format
             attendu par vos équipes.
           </p>
         </div>
 
-        <section className="mt-4 rounded-3xl border border-zinc-800 bg-zinc-950 p-6 shadow-xl sm:p-8">
+        <section className="mt-4 rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm sm:p-8">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-700/80 bg-zinc-900/80">

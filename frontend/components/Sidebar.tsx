@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   Activity,
   Building2,
+  Briefcase,
   FileText,
   Gauge,
   Hourglass,
@@ -19,6 +20,7 @@ import { useCurrency } from "../app/context/CurrencyContext";
 
 const links = [
   { href: "/", label: "Vue d'ensemble", icon: Gauge },
+  { href: "/sprint-rh/dashboard", label: "OPS Dashboard", icon: Briefcase },
   { href: "/cjm", label: "CJM Rapide", icon: Zap },
   { href: "/rentabilite", label: "Simulateur de Marge", icon: LineChart },
   { href: "/banc", label: "Impact Inter-contrat", icon: Hourglass },
@@ -47,8 +49,8 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
     return {
       className: `flex items-center gap-2 rounded-xl px-3 py-2 transition ${
         active
-          ? "bg-zinc-800 text-zinc-50"
-          : "text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100"
+          ? "border border-zinc-300 bg-white text-zinc-900 shadow-sm"
+          : "text-zinc-600 hover:bg-slate-100 hover:text-zinc-900"
       }`,
       onClick: onClose,
     };
@@ -59,16 +61,19 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
       <div className="mb-6 flex items-center justify-between gap-2 px-1">
         <Link
           href="/"
-          className="cursor-pointer font-extrabold tracking-tight text-2xl transition-opacity hover:opacity-80"
+          className="cursor-pointer transition-opacity hover:opacity-80"
         >
-          <span className="text-zinc-100">esntools</span>
-          <span className="text-cyan-400">.app</span>
+          <img
+            src="/maltem-africa-logo.png"
+            alt="Maltem Africa"
+            className="h-10 w-auto object-contain"
+          />
         </Link>
         {onClose && (
           <button
             type="button"
             onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-zinc-400 transition hover:bg-zinc-800 hover:text-zinc-100 md:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-zinc-500 transition hover:bg-slate-100 hover:text-zinc-900 md:hidden"
             aria-label="Fermer le menu"
           >
             <X className="h-5 w-5" />
@@ -77,17 +82,17 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
       </div>
 
       <div className="mb-6 px-1">
-        <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
+        <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-zinc-600">
           Devise
         </p>
-        <div className="inline-flex rounded-full border border-zinc-700/80 bg-zinc-900/80 p-1 text-xs">
+        <div className="inline-flex rounded-full border border-zinc-300 bg-white p-1 text-xs shadow-sm">
           <button
             type="button"
             onClick={() => setCurrency("MAD")}
             className={`flex items-center gap-1 rounded-full px-3 py-1.5 transition ${
               currency === "MAD"
                 ? "bg-emerald-500 text-zinc-50 shadow-sm"
-                : "text-zinc-400 hover:text-zinc-100"
+                : "text-zinc-600 hover:text-zinc-900"
             }`}
           >
             <span>DH</span>
@@ -99,7 +104,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
             className={`flex items-center gap-1 rounded-full px-3 py-1.5 transition ${
               currency === "EUR"
                 ? "bg-indigo-500 text-zinc-50 shadow-sm"
-                : "text-zinc-400 hover:text-zinc-100"
+                : "text-zinc-600 hover:text-zinc-900"
             }`}
           >
             <span>€</span>
@@ -126,7 +131,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
   return (
     <>
       {/* Desktop: sidebar fixe à gauche */}
-      <aside className="hidden h-screen w-64 shrink-0 flex-col border-r border-zinc-800 bg-zinc-950 px-4 py-5 md:flex">
+      <aside className="hidden h-screen w-64 shrink-0 flex-col border-r border-zinc-200 bg-white px-4 py-5 md:flex">
         {sidebarContent}
       </aside>
 
@@ -136,10 +141,10 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
           <button
             type="button"
             onClick={onClose}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-zinc-900/20 backdrop-blur-sm"
             aria-label="Fermer le menu"
           />
-          <aside className="relative z-10 flex h-full w-64 max-w-[85vw] flex-col border-r border-zinc-800 bg-zinc-950 px-4 py-5 shadow-xl">
+          <aside className="relative z-10 flex h-full w-64 max-w-[85vw] flex-col border-r border-zinc-200 bg-white px-4 py-5 shadow-xl">
             {sidebarContent}
           </aside>
         </div>

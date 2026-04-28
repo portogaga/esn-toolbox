@@ -70,11 +70,11 @@ export default function CJMPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900">
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         {backendOffline && (
           <p
-            className="mb-6 rounded-xl border border-amber-900/60 bg-amber-950/40 px-4 py-2.5 text-center text-sm text-amber-200/90"
+            className="mb-6 rounded-xl border border-amber-900/60 bg-amber-50 px-4 py-2.5 text-center text-sm text-amber-700"
             role="status"
           >
             Serveur de calcul hors ligne.
@@ -82,35 +82,35 @@ export default function CJMPage() {
         )}
 
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-zinc-50 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-zinc-900 sm:text-3xl">
             Évaluation Express du Coût Journalier
           </h1>
-          <p className="mt-2 max-w-2xl text-base text-zinc-400">
+          <p className="mt-2 max-w-2xl text-base text-zinc-600">
             Estimez rapidement le Coût Journalier Moyen (PRJ) d&apos;un profil à partir de ses
             prétentions salariales nettes. Un indicateur clé pour valider instantanément la
             faisabilité financière d&apos;un placement client.
           </p>
         </div>
 
-        <section className="mt-4 rounded-3xl border border-slate-800/90 bg-slate-900/60 p-6 shadow-xl sm:p-8">
-          <h2 className="mb-6 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-zinc-400">
+        <section className="mt-4 rounded-3xl border border-zinc-200 bg-white p-6 shadow-xl sm:p-8">
+          <h2 className="mb-6 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-zinc-600">
             <Zap className="h-4 w-4 text-amber-400" />
             Calculateur de CJM rapide
           </h2>
-          <p className="mb-4 text-sm text-zinc-500">
+          <p className="mb-4 text-sm text-zinc-9000">
             Saisissez votre salaire net mensuel pour obtenir une estimation du
             CJM. Basé sur une estimation du coût total employeur divisé par 20
             jours de production mensuelle.
           </p>
 
-          <div className="mb-5 inline-flex rounded-full border border-zinc-700/80 bg-zinc-900/80 p-1 text-xs">
+          <div className="mb-5 inline-flex rounded-full border border-zinc-700/80 bg-slate-50 p-1 text-xs">
             <button
               type="button"
               onClick={() => setPays("MA")}
               className={`rounded-full px-3 py-1.5 transition ${
                 pays === "MA"
                   ? "border border-cyan-400 bg-cyan-500/10 text-cyan-300"
-                  : "border border-transparent text-zinc-400 hover:text-zinc-100"
+                  : "border border-transparent text-zinc-600 hover:text-zinc-800"
               }`}
             >
               🇲🇦 Maroc
@@ -121,7 +121,7 @@ export default function CJMPage() {
               className={`rounded-full px-3 py-1.5 transition ${
                 pays === "FR"
                   ? "border border-cyan-400 bg-cyan-500/10 text-cyan-300"
-                  : "border border-transparent text-zinc-400 hover:text-zinc-100"
+                  : "border border-transparent text-zinc-600 hover:text-zinc-800"
               }`}
             >
               🇫🇷 France
@@ -130,7 +130,7 @@ export default function CJMPage() {
 
           <div className="flex flex-wrap items-end gap-4">
             <div className="min-w-[200px] flex-1">
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Salaire net mensuel
               </label>
               <input
@@ -143,7 +143,7 @@ export default function CJMPage() {
                   setCjmError(null);
                 }}
                 placeholder="ex. 2500"
-                className="w-full rounded-xl border border-slate-700 bg-zinc-950/80 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
               />
             </div>
             <button
@@ -162,12 +162,12 @@ export default function CJMPage() {
             </p>
           )}
           {cjmCalcule !== null && !cjmError && (
-            <div className="mt-4 rounded-xl border border-slate-700/80 bg-zinc-950/60 px-4 py-3">
-              <span className="text-xs text-zinc-500">CJM estimé : </span>
+            <div className="mt-4 rounded-xl border border-zinc-300/80 bg-zinc-950/60 px-4 py-3">
+              <span className="text-xs text-zinc-9000">CJM estimé : </span>
               <span className="text-lg font-semibold text-amber-400">
                 {formatEuro(cjmCalcule)} {currencySymbol}
               </span>
-              <span className="text-zinc-500"> / jour</span>
+              <span className="text-zinc-9000"> / jour</span>
             </div>
           )}
         </section>

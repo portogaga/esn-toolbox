@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   Activity,
   Building2,
+  Briefcase,
   ChevronRight,
   FileText,
   Hourglass,
@@ -79,13 +80,6 @@ const TOOLS = [
     icon: PieChart,
     accent: "emerald",
   },
-  {
-    href: "/sprint-rh",
-    name: "Sprint RH",
-    description: "Gérez votre sprint planning, dailies, et récaps de recrutement.",
-    icon: Activity,
-    accent: "indigo",
-  },
 ] as const;
 
 const accentClasses: Record<string, string> = {
@@ -103,18 +97,18 @@ export default function Home() {
   const { currency, setCurrency } = useCurrency();
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Sélecteur de devise */}
         <div className="mb-8 flex justify-end">
-          <div className="inline-flex rounded-full border border-zinc-700/80 bg-zinc-900/80 p-1 text-xs">
+          <div className="inline-flex rounded-full border border-zinc-300 bg-white p-1 text-xs shadow-sm">
             <button
               type="button"
               onClick={() => setCurrency("MAD")}
               className={`rounded-full px-3 py-1.5 transition ${
                 currency === "MAD"
                   ? "bg-emerald-500 text-zinc-950 shadow"
-                  : "text-zinc-400 hover:text-zinc-100"
+                  : "text-zinc-500 hover:text-zinc-900"
               }`}
             >
               DH MAD
@@ -125,7 +119,7 @@ export default function Home() {
               className={`rounded-full px-3 py-1.5 transition ${
                 currency === "EUR"
                   ? "bg-emerald-500 text-zinc-950 shadow"
-                  : "text-zinc-400 hover:text-zinc-100"
+                  : "text-zinc-500 hover:text-zinc-900"
               }`}
             >
               € EUR
@@ -135,22 +129,41 @@ export default function Home() {
 
         {/* Hero */}
         <section className="mb-16 text-center">
-          <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-zinc-50 sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-zinc-900 sm:text-5xl md:text-6xl lg:text-7xl">
             Le Couteau Suisse du Business Developer ESN.
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-400 sm:text-xl">
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-600 sm:text-xl">
             9 outils de precision pour piloter votre rentabilite, de Casablanca a Paris.
           </p>
         </section>
 
-        {/* Citation */}
-        <blockquote className="mb-20 border-l-4 border-emerald-500/60 bg-zinc-900/60 py-6 pl-6 pr-6 sm:pl-8">
-          <p className="text-base leading-relaxed text-zinc-300 sm:text-lg">
-            La rentabilité ne se devine pas, elle se calcule. En ESN, la marge ne se fait pas
-            uniquement sur un bon TJM facturé. Elle se gagne sur l&apos;ingénierie financière de
-            vos contrats.
+        {/* Intro brève */}
+        <blockquote className="mb-20 border-l-4 border-emerald-500/60 bg-emerald-50 py-6 pl-6 pr-6 sm:pl-8">
+          <p className="text-base leading-relaxed text-zinc-700 sm:text-lg">
+            Pilotez vos décisions business avec des outils simples, rapides et orientés action.
           </p>
         </blockquote>
+
+        {/* Outil principal */}
+        <section className="mb-10">
+          <Link
+            href="/sprint-rh/dashboard"
+            className="group relative block overflow-hidden rounded-3xl border border-indigo-200 bg-gradient-to-r from-indigo-50 via-sky-50 to-white p-6 shadow-sm transition hover:border-indigo-300 hover:shadow-md sm:p-8"
+          >
+            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-300/60 bg-indigo-500/10 text-indigo-500">
+              <Briefcase className="h-6 w-6" />
+            </div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-indigo-600">Principal</p>
+            <h2 className="mt-2 text-2xl font-bold text-zinc-900 sm:text-3xl">Maltem OPS Dashboard</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-600 sm:text-base">
+              Le cockpit principal pour piloter vos besoins, votre prospection et le suivi recrutement.
+            </p>
+            <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-indigo-600">
+              Ouvrir le dashboard
+              <ChevronRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+            </span>
+          </Link>
+        </section>
 
         {/* Grille des outils */}
         <section className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -161,17 +174,17 @@ export default function Home() {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="group relative flex flex-col rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 transition hover:border-zinc-700 hover:bg-zinc-900/70 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2 focus:ring-offset-zinc-950"
+                className="group relative flex flex-col rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition hover:border-zinc-300 hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2 focus:ring-offset-zinc-50"
               >
                 <div
                   className={`mb-4 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border transition ${accent}`}
                 >
                   <Icon className="h-6 w-6" strokeWidth={2} />
                 </div>
-                <h2 className="text-lg font-semibold text-zinc-100 group-hover:text-white">
+                <h2 className="text-lg font-semibold text-zinc-900 group-hover:text-black">
                   {tool.name}
                 </h2>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-600">
                   {tool.description}
                 </p>
                 <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-emerald-400">

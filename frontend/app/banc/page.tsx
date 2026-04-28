@@ -91,11 +91,11 @@ export default function BancPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900">
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         {backendOffline && (
           <p
-            className="mb-6 rounded-xl border border-amber-900/60 bg-amber-950/40 px-4 py-2.5 text-center text-sm text-amber-200/90"
+            className="mb-6 rounded-xl border border-amber-900/60 bg-amber-50 px-4 py-2.5 text-center text-sm text-amber-700"
             role="status"
           >
             Serveur de calcul hors ligne.
@@ -103,29 +103,29 @@ export default function BancPage() {
         )}
 
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-zinc-50 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-zinc-900 sm:text-3xl">
             Analyse du Coût d&apos;Inter-contrat
           </h1>
-          <p className="mt-2 max-w-2xl text-base text-zinc-400">
+          <p className="mt-2 max-w-2xl text-base text-zinc-600">
             Visualisez l&apos;impact financier de l&apos;inter-contrat sur la trésorerie de
             l&apos;agence. Mesurez le coût réel des jours non facturés et déterminez la durée de
             facturation nécessaire pour absorber cette perte.
           </p>
         </div>
 
-        <section className="mt-4 rounded-3xl border border-slate-800/90 bg-slate-900/60 p-6 shadow-xl sm:p-8">
-          <h2 className="mb-6 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-zinc-400">
+        <section className="mt-4 rounded-3xl border border-zinc-200 bg-white p-6 shadow-xl sm:p-8">
+          <h2 className="mb-6 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-zinc-600">
             <Hourglass className="h-4 w-4 text-slate-400" />
             Impact de l&apos;Inter-contrat (Le Banc)
           </h2>
-          <p className="mb-6 text-sm text-zinc-500">
+          <p className="mb-6 text-sm text-zinc-9000">
             Estimez le coût du banc et le nombre de jours de facturation
             nécessaires pour l&apos;absorber.
           </p>
 
           <div className="grid gap-6 sm:grid-cols-3">
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 CJM / PRJ / Coût journalier CDI
               </label>
               <input
@@ -138,14 +138,14 @@ export default function BancPage() {
                   setBancError(null);
                 }}
                 placeholder="ex. 350"
-                className="w-full rounded-xl border border-slate-700 bg-zinc-950/80 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 <span>
                   TJM{" "}
-                  <span className="ml-1 text-xs font-normal text-zinc-500">
+                  <span className="ml-1 text-xs font-normal text-zinc-9000">
                     (facturé)
                   </span>
                 </span>
@@ -160,11 +160,11 @@ export default function BancPage() {
                   setBancError(null);
                 }}
                 placeholder="ex. 550"
-                className="w-full rounded-xl border border-slate-700 bg-zinc-950/80 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 flex items-center gap-1.5 text-xs font-medium text-zinc-400">
+              <label className="mb-2 flex items-center gap-1.5 text-xs font-medium text-zinc-600">
                 <Calendar className="h-3.5 w-3.5" />
                 Jours sur le banc
               </label>
@@ -178,7 +178,7 @@ export default function BancPage() {
                   setBancError(null);
                 }}
                 placeholder="ex. 15"
-                className="w-full rounded-xl border border-slate-700 bg-zinc-950/80 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
               />
             </div>
           </div>
@@ -203,7 +203,7 @@ export default function BancPage() {
 
           {bancError && (
             <div
-              className="mt-4 flex items-start gap-2 rounded-xl border border-red-900/60 bg-red-950/40 px-4 py-3 text-sm text-red-200"
+              className="mt-4 flex items-start gap-2 rounded-xl border border-red-900/60 bg-red-950/40 px-4 py-3 text-sm text-red-700"
               role="alert"
             >
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
@@ -212,8 +212,8 @@ export default function BancPage() {
           )}
 
           {bancResult && !bancError && (
-            <div className="mt-6 rounded-2xl border border-slate-700/80 bg-slate-950/80 p-6">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            <div className="mt-6 rounded-2xl border border-zinc-300/80 bg-slate-950/80 p-6">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-9000">
                 Résultats
               </p>
               <div className="grid gap-4 sm:grid-cols-3">
@@ -225,7 +225,7 @@ export default function BancPage() {
                     {formatEuro(bancResult.cout_total_banc)} {currencySymbol}
                   </p>
                 </div>
-                <div className="rounded-xl border border-slate-700/80 bg-slate-900/60 p-4">
+                <div className="rounded-xl border border-zinc-300/80 bg-white p-4">
                   <p className="text-xs font-medium uppercase tracking-wider text-sky-300/90">
                     Marge journalière générée
                   </p>

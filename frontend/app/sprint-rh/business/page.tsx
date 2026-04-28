@@ -224,7 +224,7 @@ export default function BusinessPage() {
         </div>
       )}
 
-      <section className="rounded-3xl border border-white/15 bg-gradient-to-br from-zinc-900/95 via-zinc-900/85 to-black/95 p-6 shadow-2xl shadow-black/30">
+      <section className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm">
         {loadError && (
           <p className="mb-4 rounded-xl border border-rose-400/30 bg-rose-500/10 p-3 text-sm text-rose-200">
             {loadError}
@@ -232,14 +232,14 @@ export default function BusinessPage() {
         )}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.18em] text-zinc-500">Business</p>
-            <h1 className="mt-2 text-3xl font-semibold text-zinc-50">Pilotage besoins et profils</h1>
-            <p className="mt-2 text-sm text-zinc-400">Ajoute des RDV, ajoute des profils, puis gere leurs statuts sur chaque besoin.</p>
+            <p className="text-[11px] uppercase tracking-[0.18em] text-zinc-9000">Business</p>
+            <h1 className="mt-2 text-3xl font-semibold text-zinc-900">Pilotage besoins et profils</h1>
+            <p className="mt-2 text-sm text-zinc-600">Ajoute des RDV, ajoute des profils, puis gere leurs statuts sur chaque besoin.</p>
           </div>
           <select
             value={currentSemaineId}
             onChange={(e) => setCurrentSemaineId(e.target.value)}
-            className="rounded-xl border border-white/15 bg-zinc-950/90 px-3 py-2 text-sm text-zinc-100"
+            className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800"
           >
             {semaines.map((s) => (
               <option key={s.id} value={s.id}>
@@ -251,32 +251,32 @@ export default function BusinessPage() {
       </section>
 
       <section className="grid grid-cols-1 gap-4 xl:grid-cols-3">
-        <div className="rounded-2xl border border-white/10 bg-zinc-900/70 p-4">
-          <p className="mb-3 text-xs uppercase tracking-wide text-zinc-500">Ajouter un besoin</p>
+        <div className="rounded-2xl border border-zinc-200 bg-white p-4">
+          <p className="mb-3 text-xs uppercase tracking-wide text-zinc-9000">Ajouter un besoin</p>
           <div className="grid grid-cols-1 gap-2">
             <input
               value={newBesoinPoste}
               onChange={(e) => setNewBesoinPoste(e.target.value)}
               placeholder="Poste"
-              className="rounded-xl border border-white/15 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-100"
+              className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800"
             />
             <input
               value={newBesoinClient}
               onChange={(e) => setNewBesoinClient(e.target.value)}
               placeholder="Client"
-              className="rounded-xl border border-white/15 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-100"
+              className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800"
             />
             <div className="grid grid-cols-2 gap-2">
               <input
                 value={newBesoinBizOwner}
                 onChange={(e) => setNewBesoinBizOwner(e.target.value)}
                 placeholder="Biz owner"
-                className="rounded-xl border border-white/15 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-100"
+                className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800"
               />
               <select
                 value={newBesoinPriorite}
                 onChange={(e) => setNewBesoinPriorite(e.target.value)}
-                className="rounded-xl border border-white/15 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-100"
+                className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800"
               >
                 <option value="P0">P0</option>
                 <option value="P1">P1</option>
@@ -293,26 +293,26 @@ export default function BusinessPage() {
           </button>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-zinc-900/70 p-4">
-          <p className="mb-3 text-xs uppercase tracking-wide text-zinc-500">Ajouter un RDV</p>
+        <div className="rounded-2xl border border-zinc-200 bg-white p-4">
+          <p className="mb-3 text-xs uppercase tracking-wide text-zinc-9000">Ajouter un RDV</p>
           <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
             <input
               value={rdvCompte}
               onChange={(e) => setRdvCompte(e.target.value)}
               placeholder="Compte client"
-              className="rounded-xl border border-white/15 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-100"
+              className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800"
             />
             <input
               value={rdvCommercial}
               onChange={(e) => setRdvCommercial(e.target.value)}
               placeholder="Commercial"
-              className="rounded-xl border border-white/15 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-100"
+              className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800"
             />
             <input
               type="date"
               value={rdvDate}
               onChange={(e) => setRdvDate(e.target.value)}
-              className="rounded-xl border border-white/15 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-100"
+              className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800"
             />
           </div>
           <button
@@ -324,13 +324,13 @@ export default function BusinessPage() {
           </button>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-zinc-900/70 p-4">
-          <p className="mb-3 text-xs uppercase tracking-wide text-zinc-500">Ajouter un profil pour un besoin</p>
+        <div className="rounded-2xl border border-zinc-200 bg-white p-4">
+          <p className="mb-3 text-xs uppercase tracking-wide text-zinc-9000">Ajouter un profil pour un besoin</p>
           <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
             <select
               value={profilBesoinId}
               onChange={(e) => setProfilBesoinId(e.target.value)}
-              className="rounded-xl border border-white/15 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-100"
+              className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800"
             >
               {besoins.map((b) => (
                 <option key={b.id} value={b.id}>
@@ -342,13 +342,13 @@ export default function BusinessPage() {
               value={profilCandidat}
               onChange={(e) => setProfilCandidat(e.target.value)}
               placeholder="Nom candidat"
-              className="rounded-xl border border-white/15 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-100"
+              className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800"
             />
             <input
               value={profilRecruteur}
               onChange={(e) => setProfilRecruteur(e.target.value)}
               placeholder="Source (Biz/Recrut)"
-              className="rounded-xl border border-white/15 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-100"
+              className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800"
             />
           </div>
           <button
@@ -362,19 +362,19 @@ export default function BusinessPage() {
       </section>
 
       <section className="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_1.3fr]">
-        <div className="rounded-3xl border border-white/10 bg-zinc-900/70 p-4">
+        <div className="rounded-3xl border border-zinc-200 bg-white p-4">
           <div className="mb-3 flex items-center justify-between gap-3">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-300">Besoins</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-700">Besoins</h2>
             <button
               onClick={() => setShowAllBesoins((prev) => !prev)}
-              className="rounded-lg border border-white/15 bg-zinc-900/80 px-2 py-1 text-xs text-zinc-300 hover:border-white/25"
+              className="rounded-lg border border-zinc-200 bg-slate-100 px-2 py-1 text-xs text-zinc-700 hover:border-zinc-300"
             >
               {showAllBesoins ? "Voir en cours" : "Voir tous"}
             </button>
           </div>
           <div className="space-y-2">
             {besoins.length === 0 && (
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm text-zinc-9000">
                 {showAllBesoins ? "Aucun besoin sur ce sprint." : "Aucun besoin en cours."}
               </p>
             )}
@@ -385,31 +385,31 @@ export default function BusinessPage() {
                 className={`w-full rounded-xl border p-3 text-left transition ${
                   selectedBesoinId === b.id
                     ? "border-sky-500/60 bg-sky-500/10"
-                    : "border-white/10 bg-zinc-950/70 hover:border-white/20"
+                    : "border-zinc-200 bg-white hover:border-zinc-300"
                 }`}
               >
-                <p className="text-sm font-medium text-zinc-100">{b.poste}</p>
-                <p className="text-xs text-zinc-500">{b.client} · {b.statut || "nouveau"}</p>
+                <p className="text-sm font-medium text-zinc-800">{b.poste}</p>
+                <p className="text-xs text-zinc-9000">{b.client} · {b.statut || "nouveau"}</p>
               </button>
             ))}
           </div>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-zinc-900/70 p-4">
-          <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-zinc-300">
+        <div className="rounded-3xl border border-zinc-200 bg-white p-4">
+          <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-zinc-700">
             <Briefcase className="h-4 w-4 text-sky-300" />
             Profils proposes {selectedBesoin ? `- ${selectedBesoin.poste}` : ""}
           </h2>
 
           {selectedBesoin && (
-            <div className="mb-4 rounded-xl border border-white/10 bg-zinc-950/70 p-3">
-              <p className="text-xs uppercase tracking-wide text-zinc-500">Parametres du besoin</p>
+            <div className="mb-4 rounded-xl border border-zinc-200 bg-white p-3">
+              <p className="text-xs uppercase tracking-wide text-zinc-9000">Parametres du besoin</p>
               <div className="mt-2 grid grid-cols-1 gap-2 md:grid-cols-3">
                 <select
                   value={selectedBesoin.priorite || "P1"}
                   onChange={(e) => patchBesoin({ priorite: e.target.value })}
                   disabled={updatingBesoin}
-                  className="rounded-lg border border-white/15 bg-zinc-900/80 px-2 py-1.5 text-xs text-zinc-100 disabled:opacity-60"
+                  className="rounded-lg border border-zinc-200 bg-slate-100 px-2 py-1.5 text-xs text-zinc-800 disabled:opacity-60"
                 >
                   <option value="P0">Priorite P0</option>
                   <option value="P1">Priorite P1</option>
@@ -420,7 +420,7 @@ export default function BusinessPage() {
                   value={selectedBesoin.statut || "nouveau"}
                   onChange={(e) => patchBesoin({ statut: e.target.value })}
                   disabled={updatingBesoin}
-                  className="rounded-lg border border-white/15 bg-zinc-900/80 px-2 py-1.5 text-xs text-zinc-100 disabled:opacity-60"
+                  className="rounded-lg border border-zinc-200 bg-slate-100 px-2 py-1.5 text-xs text-zinc-800 disabled:opacity-60"
                 >
                   <option value="nouveau">Statut: Nouveau</option>
                   <option value="en_cours">Statut: En cours</option>
@@ -442,13 +442,13 @@ export default function BusinessPage() {
           )}
 
           <div className="space-y-2">
-            {profils.length === 0 && <p className="text-sm text-zinc-500">Aucun profil pour ce besoin.</p>}
+            {profils.length === 0 && <p className="text-sm text-zinc-9000">Aucun profil pour ce besoin.</p>}
             {profils.map((p) => (
-              <div key={p.id} className="rounded-xl border border-white/10 bg-zinc-950/70 p-3">
+              <div key={p.id} className="rounded-xl border border-zinc-200 bg-white p-3">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <p className="text-sm font-medium text-zinc-100">{p.candidat}</p>
-                    <p className="text-xs text-zinc-500">Source: {p.recruteur}</p>
+                    <p className="text-sm font-medium text-zinc-800">{p.candidat}</p>
+                    <p className="text-xs text-zinc-9000">Source: {p.recruteur}</p>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <button

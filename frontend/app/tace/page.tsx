@@ -100,13 +100,13 @@ export default function TacePage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900">
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-zinc-50 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-zinc-900 sm:text-3xl">
             Pilotage de la Performance (TACE)
           </h1>
-          <p className="mt-2 max-w-2xl text-base text-zinc-400">
+          <p className="mt-2 max-w-2xl text-base text-zinc-600">
             Mesurez la véritable productivité de vos équipes. Le Taux d&apos;Activité Congés Exclus
             vous permet de piloter la performance de votre centre de services et de chiffrer le
             manque à gagner de l&apos;inactivité.
@@ -116,14 +116,14 @@ export default function TacePage() {
         <section className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6 shadow-xl sm:p-8">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-700/80 bg-zinc-900/80">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-700/80 bg-slate-50">
                 <Activity className="h-5 w-5 text-emerald-400" />
               </div>
               <div>
-                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-600">
                   Pilotage de la Performance : TACE
                 </h2>
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs text-zinc-9000">
                   Mesurez le taux d&apos;activité facturable réel et son impact sur le chiffre
                   d&apos;affaires.
                 </p>
@@ -133,7 +133,7 @@ export default function TacePage() {
 
           <div className="grid gap-6 sm:grid-cols-3">
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Jours ouvrés / an
               </label>
               <input
@@ -145,11 +145,11 @@ export default function TacePage() {
                   setJoursOuvres(e.target.value);
                   setTaceError(null);
                 }}
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Congés & fériés (jours)
               </label>
               <input
@@ -161,11 +161,11 @@ export default function TacePage() {
                   setJoursConges(e.target.value);
                   setTaceError(null);
                 }}
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Jours inter-contrat
               </label>
               <input
@@ -177,11 +177,11 @@ export default function TacePage() {
                   setJoursIntercontrat(e.target.value);
                   setTaceError(null);
                 }}
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 Jours formation / interne
               </label>
               <input
@@ -193,14 +193,14 @@ export default function TacePage() {
                   setJoursFormation(e.target.value);
                   setTaceError(null);
                 }}
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="mb-2 block text-xs font-medium text-zinc-400">
+              <label className="mb-2 block text-xs font-medium text-zinc-600">
                 <span>
                   TJM{" "}
-                  <span className="ml-1 text-xs font-normal text-zinc-500">
+                  <span className="ml-1 text-xs font-normal text-zinc-9000">
                     (facturé)
                   </span>
                 </span>
@@ -215,7 +215,7 @@ export default function TacePage() {
                   setTaceError(null);
                 }}
                 placeholder="ex. 550"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder:text-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-zinc-800 placeholder:text-zinc-9000 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               />
             </div>
           </div>
@@ -240,7 +240,7 @@ export default function TacePage() {
 
           {taceError && (
             <div
-              className="mt-4 flex items-start gap-2 rounded-xl border border-red-900/70 bg-red-950/40 px-4 py-3 text-sm text-red-200"
+              className="mt-4 flex items-start gap-2 rounded-xl border border-red-900/70 bg-red-950/40 px-4 py-3 text-sm text-red-700"
               role="alert"
             >
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
@@ -263,13 +263,13 @@ export default function TacePage() {
                     ? "bg-emerald-900/40 text-emerald-200"
                     : t >= 90
                     ? "bg-amber-900/40 text-amber-200"
-                    : "bg-red-900/40 text-red-200";
+                    : "bg-red-900/40 text-red-700";
                 return (
                   <div className="flex flex-wrap items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
                       <Target className={`h-6 w-6 ${colorClass}`} />
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500">
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-9000">
                           TACE — Taux d&apos;activité facturable
                         </p>
                         <p className={`mt-1 text-3xl font-extrabold sm:text-4xl ${colorClass}`}>
@@ -294,18 +294,18 @@ export default function TacePage() {
 
               <div className="grid gap-4 sm:grid-cols-3 text-sm">
                 <div className="rounded-2xl border border-zinc-700/80 bg-zinc-950/70 p-4">
-                  <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500">
+                  <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-9000">
                     Jours facturés / disponibles
                   </p>
-                  <p className="mt-2 text-lg font-semibold text-zinc-100">
+                  <p className="mt-2 text-lg font-semibold text-zinc-800">
                     {taceResult.jours_factures}{" "}
-                    <span className="text-zinc-500 text-sm">
+                    <span className="text-zinc-9000 text-sm">
                       / {taceResult.jours_disponibles}
                     </span>
                   </p>
                 </div>
                 <div className="rounded-2xl border border-zinc-700/80 bg-zinc-950/70 p-4">
-                  <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500">
+                  <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-9000">
                     Chiffre d&apos;affaires réalisé
                   </p>
                   <p className="mt-2 text-lg font-semibold text-emerald-400">
@@ -313,7 +313,7 @@ export default function TacePage() {
                   </p>
                 </div>
                 <div className="rounded-2xl border border-zinc-700/80 bg-zinc-950/70 p-4">
-                  <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500">
+                  <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-9000">
                     Manque à gagner (banc & interne)
                   </p>
                   <p className="mt-2 inline-flex items-center gap-1 text-lg font-semibold text-red-400">

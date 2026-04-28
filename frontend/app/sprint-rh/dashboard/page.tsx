@@ -183,7 +183,7 @@ export default function SprintDashboard() {
     : [];
 
   const KpiCard = ({ title, value, colorClass }: { title: string; value: number; colorClass: string }) => (
-    <div className="group relative overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-br from-zinc-900/95 via-zinc-900/80 to-black/95 p-5 shadow-[0_12px_35px_rgba(0,0,0,0.45)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-white/30">
+    <div className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-zinc-300">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(56,189,248,0.14),transparent_40%),radial-gradient(circle_at_85%_80%,rgba(99,102,241,0.14),transparent_45%)]" />
       <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/10 blur-2xl transition group-hover:bg-white/15" />
       <p className="relative text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-400">{title}</p>
@@ -205,7 +205,7 @@ export default function SprintDashboard() {
     if (statut === "clos" || statut === "pourvu") return "text-emerald-300 bg-emerald-500/10 border-emerald-400/40";
     if (statut === "bloque") return "text-rose-300 bg-rose-500/10 border-rose-400/40";
     if (statut === "reporte") return "text-violet-300 bg-violet-500/10 border-violet-400/40";
-    return "text-zinc-300 bg-zinc-500/10 border-white/20";
+    return "text-zinc-700 bg-zinc-500/10 border-zinc-300";
   };
 
   const toggleFullscreen = async () => {
@@ -240,10 +240,10 @@ export default function SprintDashboard() {
   if (!semaines.length) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] space-y-6">
-        <p className="text-zinc-500">Aucun sprint n'a encore été créé.</p>
+        <p className="text-zinc-600">Aucun sprint n'a encore été créé.</p>
         <a
           href="/sprint-rh/sprint"
-          className="rounded-xl border border-slate-700 bg-slate-800 px-6 py-3 text-sm font-medium text-zinc-100 transition hover:bg-slate-700"
+          className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-medium text-zinc-800 shadow-sm transition hover:bg-slate-50"
         >
           Planifier un Sprint
         </a>
@@ -257,19 +257,19 @@ export default function SprintDashboard() {
       <div className="pointer-events-none absolute -left-12 top-32 h-44 w-44 rounded-full bg-cyan-500/15 blur-3xl" />
       <div className="pointer-events-none absolute -right-16 top-60 h-56 w-56 rounded-full bg-violet-500/15 blur-3xl" />
 
-      <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-zinc-900/95 via-zinc-900/80 to-black/95 p-6 sm:p-8 shadow-[0_24px_55px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
+      <div className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-gradient-to-br from-white via-slate-50 to-slate-100 p-6 sm:p-8 shadow-[0_16px_38px_rgba(2,6,23,0.08)] backdrop-blur-2xl">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(56,189,248,0.12),transparent_38%),radial-gradient(circle_at_90%_85%,rgba(217,70,239,0.12),transparent_45%)]" />
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <p className="text-[11px] uppercase tracking-[0.18em] text-zinc-500">Sprint RH</p>
-            <h1 className="mt-2 text-2xl font-semibold text-zinc-50 sm:text-3xl">Vue d'ensemble</h1>
-            <p className="mt-2 text-sm text-zinc-400">Grand tableau d'animation de sprint, comme en salle de pilotage.</p>
+            <h1 className="mt-2 text-2xl font-semibold text-zinc-900 sm:text-3xl">Vue d'ensemble</h1>
+            <p className="mt-2 text-sm text-zinc-600">Grand tableau d'animation de sprint, comme en salle de pilotage.</p>
           </div>
           <div className="flex items-center gap-3">
             <select
               value={currentSemaineId || ""}
               onChange={(e) => setCurrentSemaineId(e.target.value)}
-              className="rounded-xl border border-slate-700 bg-zinc-950/80 px-4 py-2 text-sm text-zinc-100 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
+              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm text-zinc-800 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
             >
               {semaines.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -280,14 +280,14 @@ export default function SprintDashboard() {
             {isHistorical && (
               <button
                 onClick={() => setCurrentSemaineId(semaines[0].id)}
-                className="inline-flex items-center gap-2 rounded-xl border border-sky-800/60 bg-sky-950/40 px-4 py-2 text-sm text-sky-300 transition hover:bg-sky-900/50"
+                className="inline-flex items-center gap-2 rounded-xl border border-sky-300 bg-sky-50 px-4 py-2 text-sm text-sky-700 transition hover:bg-sky-100"
               >
                 Sprint Courant <ArrowUpRight className="h-3.5 w-3.5" />
               </button>
             )}
             <button
               onClick={toggleFullscreen}
-              className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-zinc-900/80 px-4 py-2 text-sm text-zinc-200 transition hover:border-white/25 hover:bg-zinc-800"
+              className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-50"
               title="Mode salle de guerre"
             >
               {isFullscreen ? <Shrink className="h-3.5 w-3.5" /> : <Expand className="h-3.5 w-3.5" />}
@@ -305,10 +305,10 @@ export default function SprintDashboard() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1.7fr_1fr]">
-        <section className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-zinc-900/95 via-zinc-900/85 to-black/90 p-5 sm:p-6 shadow-[0_18px_45px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+        <section className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(56,189,248,0.12),transparent_32%)]" />
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-zinc-300">
+            <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-zinc-700">
               <Briefcase className="h-4 w-4 text-sky-400" />
               Mur des besoins
             </h2>
@@ -319,13 +319,13 @@ export default function SprintDashboard() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Rechercher poste/client/biz"
-                  className="w-full rounded-xl border border-white/10 bg-zinc-950/80 py-2 pl-9 pr-3 text-sm text-zinc-200 outline-none ring-0 placeholder:text-zinc-500 focus:border-sky-500/60 sm:w-64"
+                  className="w-full rounded-xl border border-zinc-200 bg-white py-2 pl-9 pr-3 text-sm text-zinc-800 outline-none ring-0 placeholder:text-zinc-500 focus:border-sky-500/60 sm:w-64"
                 />
               </div>
               <select
                 value={selectedClient}
                 onChange={(e) => setSelectedClient(e.target.value)}
-                className="rounded-xl border border-white/10 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-200 outline-none focus:border-sky-500/60"
+                className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800 outline-none focus:border-sky-500/60"
               >
                 <option value="all">Tous les clients</option>
                 {clients.map((client) => (
@@ -340,7 +340,7 @@ export default function SprintDashboard() {
           <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="max-h-[600px] space-y-4 overflow-auto pr-1">
               {Object.keys(besoinsByClient).length === 0 && (
-                <p className="rounded-2xl border border-dashed border-white/15 bg-zinc-950/50 p-6 text-sm text-zinc-500">
+                <p className="rounded-2xl border border-dashed border-zinc-200 bg-slate-50 p-6 text-sm text-zinc-500">
                   Aucun besoin trouvé avec les filtres actuels.
                 </p>
               )}
@@ -368,7 +368,7 @@ export default function SprintDashboard() {
                         className={`w-full rounded-2xl border p-3 text-left transition-all duration-200 ${
                           isActive
                             ? "border-sky-300/70 bg-gradient-to-br from-sky-400/20 to-indigo-500/15 shadow-[0_10px_30px_rgba(56,189,248,0.2)]"
-                            : "border-white/10 bg-zinc-950/65 hover:-translate-y-0.5 hover:border-white/30 hover:bg-zinc-900/90"
+                            : "border-zinc-200 bg-white hover:-translate-y-0.5 hover:border-zinc-300 hover:bg-slate-100"
                         }`}
                       >
                         <div className="flex items-start justify-between gap-2">
@@ -392,11 +392,11 @@ export default function SprintDashboard() {
                           {isActive && <span className="h-2 w-2 animate-pulse rounded-full bg-sky-400" />}
                         </div>
                         <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-                          <div className="rounded-lg bg-zinc-900/80 p-2">
+                          <div className="rounded-lg bg-slate-100 p-2">
                             <p className="text-zinc-500">Sourcés</p>
                             <p className="font-semibold text-sky-300">{nbSources}</p>
                           </div>
-                          <div className="rounded-lg bg-zinc-900/80 p-2">
+                          <div className="rounded-lg bg-slate-100 p-2">
                             <p className="text-zinc-500">Envoyés</p>
                             <p className="font-semibold text-indigo-300">{nbEnvoyes}</p>
                           </div>
@@ -408,7 +408,7 @@ export default function SprintDashboard() {
               ))}
             </div>
 
-            <div className="rounded-2xl border border-white/15 bg-gradient-to-b from-zinc-950/85 to-black/75 p-4 shadow-[0_10px_30px_rgba(0,0,0,0.4)]">
+            <div className="rounded-2xl border border-zinc-200 bg-slate-50 p-4 shadow-sm">
               <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-zinc-400">
                 <Target className="h-3.5 w-3.5 text-sky-400" />
                 Focus besoin
@@ -417,7 +417,7 @@ export default function SprintDashboard() {
                 <p className="mt-4 text-sm text-zinc-500">Sélectionne un besoin à gauche pour voir ses détails et son pipeline.</p>
               ) : (
                 <div className="mt-4 space-y-3">
-                  <div className="rounded-xl border border-white/10 bg-zinc-900/70 p-3">
+                  <div className="rounded-xl border border-zinc-200 bg-slate-100 p-3">
                     <p className="text-sm font-semibold text-zinc-100">{selectedBesoin.poste}</p>
                     <p className="mt-1 text-xs text-zinc-500">{selectedBesoin.client}</p>
                     <div className="mt-2 flex items-center gap-2">
@@ -437,13 +437,13 @@ export default function SprintDashboard() {
                     <p className="mb-2 text-xs uppercase tracking-wide text-zinc-500">Pipeline candidat</p>
                     <div className="space-y-2">
                       {selectedBesoinProfils.length === 0 && (
-                        <p className="rounded-xl border border-dashed border-white/15 bg-zinc-900/40 p-3 text-xs text-zinc-500">
+                        <p className="rounded-xl border border-dashed border-zinc-200 bg-slate-100 p-3 text-xs text-zinc-500">
                           Aucun profil encore lié à ce besoin.
                         </p>
                       )}
                       {selectedBesoinProfils.map((p: any) => (
-                        <div key={p.id} className="rounded-xl border border-white/10 bg-zinc-900/70 p-3">
-                          <p className="text-sm text-zinc-200">{p.candidat}</p>
+                        <div key={p.id} className="rounded-xl border border-zinc-200 bg-slate-100 p-3">
+                          <p className="text-sm text-zinc-800">{p.candidat}</p>
                           <p className="mt-1 text-xs text-zinc-500">
                             {p.recruteur} · {p.statut_validation}
                           </p>
@@ -457,32 +457,32 @@ export default function SprintDashboard() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-zinc-900/95 via-zinc-900/85 to-black/90 p-5 sm:p-6 shadow-[0_18px_45px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+        <section className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_10%,rgba(168,85,247,0.12),transparent_32%)]" />
-          <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-zinc-300">
+          <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-zinc-700">
             <BarChart3 className="h-4 w-4 text-purple-400" />
             Colonne prospection
           </h2>
           <div className="max-h-[600px] space-y-4 overflow-auto pr-1">
             {Object.keys(prospectionByComm).length === 0 && (
-              <p className="rounded-2xl border border-dashed border-white/15 bg-zinc-950/50 p-6 text-sm text-zinc-500">
+              <p className="rounded-2xl border border-dashed border-zinc-200 bg-slate-50 p-6 text-sm text-zinc-500">
                 Aucun compte en prospection sur ce sprint.
               </p>
             )}
             {Object.keys(prospectionByComm).map((comm) => (
-              <div key={comm} className="rounded-2xl border border-white/10 bg-zinc-950/70 p-3">
+              <div key={comm} className="rounded-2xl border border-zinc-200 bg-white p-3">
                 <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">{comm}</p>
                 <div className="space-y-2">
                   {prospectionByComm[comm].map((c: any) => (
                     <div
                       key={c.id}
-                      className="group flex items-center justify-between rounded-xl border border-white/15 bg-zinc-900/60 p-3 transition duration-200 hover:-translate-y-0.5 hover:border-purple-300/60 hover:bg-zinc-900"
+                      className="group flex items-center justify-between rounded-xl border border-zinc-200 bg-slate-100 p-3 transition duration-200 hover:-translate-y-0.5 hover:border-purple-300/60 hover:bg-zinc-900"
                     >
                       <div>
                         <p className="text-sm font-medium text-zinc-100">{c.compte}</p>
                         <p className="mt-1 text-xs text-zinc-500">{c.statut || "a_prospecter"}</p>
                       </div>
-                      <span className="rounded-lg border border-white/10 bg-zinc-800/80 px-2 py-1 text-xs text-zinc-300">
+                      <span className="rounded-lg border border-zinc-200 bg-zinc-800/80 px-2 py-1 text-xs text-zinc-700">
                         {c.nb_rdv} RDV
                       </span>
                     </div>
@@ -495,22 +495,22 @@ export default function SprintDashboard() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-        <section className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-zinc-900/95 via-zinc-900/85 to-black/90 p-5 sm:p-6 shadow-[0_18px_45px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+        <section className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(245,158,11,0.12),transparent_32%)]" />
-          <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-zinc-300">
+          <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-zinc-700">
             <Clock3 className="h-4 w-4 text-amber-400" />
             Feedback en attente
           </h2>
           <div className="space-y-2">
             {feedbackList.length === 0 && (
-              <p className="rounded-2xl border border-dashed border-white/15 bg-zinc-950/50 p-6 text-sm text-zinc-500">
+              <p className="rounded-2xl border border-dashed border-zinc-200 bg-slate-50 p-6 text-sm text-zinc-500">
                 Aucun feedback en attente.
               </p>
             )}
             {feedbackList.map((p: any) => (
               <div
                 key={p.id}
-                className="flex items-center justify-between rounded-xl border border-white/15 bg-zinc-950/70 p-3 transition duration-200 hover:-translate-y-0.5 hover:border-amber-300/60"
+                className="flex items-center justify-between rounded-xl border border-zinc-200 bg-white p-3 transition duration-200 hover:-translate-y-0.5 hover:border-amber-300/60"
               >
                 <div>
                   <p className="text-sm font-medium text-zinc-100">{p.candidat}</p>
@@ -524,22 +524,22 @@ export default function SprintDashboard() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-zinc-900/95 via-zinc-900/85 to-black/90 p-5 sm:p-6 shadow-[0_18px_45px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+        <section className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(16,185,129,0.12),transparent_32%)]" />
-          <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-zinc-300">
+          <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-zinc-700">
             <Rocket className="h-4 w-4 text-emerald-400" />
             Closings / Hirings
           </h2>
           <div className="space-y-2">
             {closingsList.length === 0 && (
-              <p className="rounded-2xl border border-dashed border-white/15 bg-zinc-950/50 p-6 text-sm text-zinc-500">
+              <p className="rounded-2xl border border-dashed border-zinc-200 bg-slate-50 p-6 text-sm text-zinc-500">
                 Aucun hiring enregistré pour le moment.
               </p>
             )}
             {closingsList.map((p: any) => (
               <div
                 key={p.id}
-                className="flex items-center justify-between rounded-xl border border-white/15 bg-zinc-950/70 p-3 transition duration-200 hover:-translate-y-0.5 hover:border-emerald-300/60"
+                className="flex items-center justify-between rounded-xl border border-zinc-200 bg-white p-3 transition duration-200 hover:-translate-y-0.5 hover:border-emerald-300/60"
               >
                 <div>
                   <p className="text-sm font-medium text-zinc-100">{p.candidat}</p>
@@ -556,35 +556,35 @@ export default function SprintDashboard() {
         </section>
       </div>
 
-      <section className="rounded-3xl border border-white/15 bg-zinc-900/70 p-5 sm:p-6 shadow-[0_18px_45px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+      <section className="rounded-3xl border border-zinc-200 bg-slate-100 p-5 sm:p-6 shadow-[0_18px_45px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-300">KPIs par recruteur</h2>
+          <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-700">KPIs par recruteur</h2>
           <span className="text-xs text-zinc-500">{recruiterKpis.length} recruteur(s)</span>
         </div>
 
         {recruiterKpis.length === 0 ? (
-          <p className="rounded-xl border border-dashed border-white/15 bg-zinc-950/50 p-4 text-sm text-zinc-500">
+          <p className="rounded-xl border border-dashed border-zinc-200 bg-slate-50 p-4 text-sm text-zinc-500">
             Aucune donnée recruteur pour ce sprint.
           </p>
         ) : (
           <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
             {recruiterKpis.map(([recruteur, stats]) => (
-              <div key={recruteur} className="rounded-2xl border border-white/10 bg-zinc-950/70 p-4">
+              <div key={recruteur} className="rounded-2xl border border-zinc-200 bg-white p-4">
                 <p className="text-sm font-semibold text-zinc-100">{recruteur}</p>
                 <div className="mt-3 grid grid-cols-4 gap-2">
-                  <div className="rounded-lg bg-zinc-900/80 p-2 text-center">
+                  <div className="rounded-lg bg-slate-100 p-2 text-center">
                     <p className="text-[10px] uppercase text-zinc-500">Sourcés</p>
                     <p className="text-sm font-semibold text-sky-300">{stats?.sourcés || 0}</p>
                   </div>
-                  <div className="rounded-lg bg-zinc-900/80 p-2 text-center">
+                  <div className="rounded-lg bg-slate-100 p-2 text-center">
                     <p className="text-[10px] uppercase text-zinc-500">Envoyés</p>
                     <p className="text-sm font-semibold text-indigo-300">{stats?.envoyés_biz || 0}</p>
                   </div>
-                  <div className="rounded-lg bg-zinc-900/80 p-2 text-center">
+                  <div className="rounded-lg bg-slate-100 p-2 text-center">
                     <p className="text-[10px] uppercase text-zinc-500">KO</p>
                     <p className="text-sm font-semibold text-rose-300">{stats?.ko || 0}</p>
                   </div>
-                  <div className="rounded-lg bg-zinc-900/80 p-2 text-center">
+                  <div className="rounded-lg bg-slate-100 p-2 text-center">
                     <p className="text-[10px] uppercase text-zinc-500">Hiring</p>
                     <p className="text-sm font-semibold text-emerald-300">{stats?.hirings || 0}</p>
                   </div>
