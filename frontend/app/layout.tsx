@@ -43,7 +43,7 @@ export default function RootLayout({
           <ClerkProvider afterSignOutUrl="/">
             <AuthHeader />
             <CurrencyProvider>
-              <AppShell>{children}</AppShell>
+              <AppShell clerkEnabled>{children}</AppShell>
             </CurrencyProvider>
           </ClerkProvider>
         ) : (

@@ -35,9 +35,10 @@ const links = [
 type SidebarProps = {
   mobileOpen?: boolean;
   onClose?: () => void;
+  showMaltemBrand?: boolean;
 };
 
-export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
+export function Sidebar({ mobileOpen = false, onClose, showMaltemBrand = false }: SidebarProps) {
   const pathname = usePathname();
   const { currency, setCurrency } = useCurrency();
 
@@ -59,15 +60,18 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
   const sidebarContent = (
     <>
       <div className="mb-6 flex items-center justify-between gap-2 px-1">
-        <Link
-          href="/"
-          className="cursor-pointer transition-opacity hover:opacity-80"
-        >
-          <img
-            src="/maltem-africa-logo.png"
-            alt="Maltem Africa"
-            className="h-10 w-auto object-contain"
-          />
+        <Link href="/" className="cursor-pointer transition-opacity hover:opacity-80">
+          {showMaltemBrand ? (
+            <img
+              src="/maltem-africa-logo.png"
+              alt="Maltem Africa"
+              className="h-10 w-auto object-contain"
+            />
+          ) : (
+            <span className="text-2xl font-extrabold tracking-tight text-zinc-900">
+              esntools<span className="text-cyan-500">.app</span>
+            </span>
+          )}
         </Link>
         {onClose && (
           <button
