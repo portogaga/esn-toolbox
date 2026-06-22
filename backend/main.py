@@ -26,6 +26,7 @@ TEMP_UPLOADS = BASE_DIR / "temp_uploads"
 TEMP_OUTPUTS = BASE_DIR / "temp_outputs"
 TEMPLATE_CV_DETAILED = BASE_DIR / "templates" / "template_maltem.docx"
 TEMPLATE_CV_SIMPLIFIED = BASE_DIR / "templates" / "template_maltem simplified.docx"
+TEMPLATE_CV_VALKIMA = BASE_DIR / "templates" / "template_valkima.docx"
 
 
 def get_extract_cv_word_params(
@@ -433,11 +434,14 @@ async def extract_cv(
             detail=f"Erreur lors de l'appel à l'IA : {e}",
         ) from e
 
-    template_path = (
-        TEMPLATE_CV_SIMPLIFIED
-        if word_params.template_type == "simplified"
-        else TEMPLATE_CV_DETAILED
-    )
+   
+    if word_params.template_type == "valkima":
+        template_path = TEMPLATE_CV_VALKIMA
+    elif word_params.template_type == "simplified":
+        template_path = TEMPLATE_CV_SIMPLIFIED
+    else:
+        template_path = TEMPLATE_CV_DETAILED
+        
     if not template_path.is_file():
         raise HTTPException(
             status_code=500,
