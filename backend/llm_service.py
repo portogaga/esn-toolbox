@@ -1,31 +1,41 @@
 import os
+import json
 from pathlib import Path
 from dotenv import load_dotenv
 import instructor
 import vertexai
 from vertexai.generative_models import GenerativeModel
+from google.oauth2 import service_account
 from schemas import ProfilCandidat, ScoreResult
 
-# 1. Chargement robuste du fichier .env (backend/.env)
+# 1. Chargement du .env (dev local)
 env_path = Path(__file__).resolve().parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
-# 2. Initialisation Vertex AI (variables chargées via dotenv)
+# 2. Projet / région
 gcp_project_id = os.getenv("GCP_PROJECT_ID")
 gcp_location = os.getenv("GCP_LOCATION")
 if not gcp_project_id or not gcp_location:
     raise ValueError(
         "ERREUR : Variables Vertex AI introuvables.\n"
-        "Vérifie que ton fichier .env contient : GCP_PROJECT_ID et GCP_LOCATION."
+        "Vérifie que ton .env contient : GCP_PROJECT_ID et GCP_LOCATION."
     )
 
-vertexai.init(project=gcp_project_id, location=gcp_location)
+# 3. Credentials : JSON complet dans une variable d'env (Render),
+#    sinon ADC en local (gcloud auth application-default login)
+credentials = None
+creds_json = os.getenv("GOOGLE_CREDENTIALS_JSON")
+if creds_json:
+    credentials = service_account.Credentials.from_service_account_info(
+        json.loads(creds_json),
+        scopes=["https://www.googleapis.com/auth/cloud-platform"],
+    )
 
-client = instructor.from_vertexai(
-    client=GenerativeModel("gemini-2.5-flash"),
-    mode=instructor.Mode.VERTEXAI_TOOLS,
+vertexai.init(
+    project=gcp_project_id,
+    location=gcp_location,
+    credentials=credentials,
 )
-
 SYSTEM_PROMPT = """
 Tu es un expert en recrutement IT de haut niveau au sein d'une ESN. Ton rôle est d'analyser le texte fourni (CV brut, Fiche de Poste ou Appel d'Offres) et de le structurer parfaitement selon le schéma JSON attendu.
 RÈGLES ABSOLUES :
