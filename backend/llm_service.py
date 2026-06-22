@@ -3,26 +3,31 @@ import json
 from pathlib import Path
 from dotenv import load_dotenv
 import instructor
-import vertexai
-from vertexai.generative_models import GenerativeModel
+from google import genai
 from google.oauth2 import service_account
 from schemas import ProfilCandidat, ScoreResult
 
-# 1. Chargement du .env (dev local)
+# Modèle Vertex utilisé (surchargeable via variable d'env)
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+
+# 1. Chargement robuste du fichier .env (backend/.env) pour le dev local
 env_path = Path(__file__).resolve().parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
-# 2. Projet / région
+# 2. Projet / région Vertex AI
 gcp_project_id = os.getenv("GCP_PROJECT_ID")
 gcp_location = os.getenv("GCP_LOCATION")
 if not gcp_project_id or not gcp_location:
     raise ValueError(
         "ERREUR : Variables Vertex AI introuvables.\n"
-        "Vérifie que ton .env contient : GCP_PROJECT_ID et GCP_LOCATION."
+        "Vérifie que ton environnement contient : GCP_PROJECT_ID et GCP_LOCATION."
     )
 
-# 3. Credentials : JSON complet dans une variable d'env (Render),
-#    sinon ADC en local (gcloud auth application-default login)
+# 3. Credentials.
+#    - En prod (Render) : le JSON complet de la clé de service account est fourni
+#      dans la variable d'env GOOGLE_CREDENTIALS_JSON (aucun fichier de clé dans le repo).
+#    - En local : si GOOGLE_CREDENTIALS_JSON est absent, on retombe sur l'ADC
+#      (ex. `gcloud auth application-default login`).
 credentials = None
 creds_json = os.getenv("GOOGLE_CREDENTIALS_JSON")
 if creds_json:
@@ -31,11 +36,20 @@ if creds_json:
         scopes=["https://www.googleapis.com/auth/cloud-platform"],
     )
 
-vertexai.init(
+# 4. Client google-genai sur backend Vertex AI, enveloppé par instructor.
+#    (instructor.from_vertexai a été retiré ; on passe par from_genai.)
+genai_client = genai.Client(
+    vertexai=True,
     project=gcp_project_id,
     location=gcp_location,
     credentials=credentials,
 )
+
+client = instructor.from_genai(
+    genai_client,
+    mode=instructor.Mode.GENAI_TOOLS,
+)
+
 SYSTEM_PROMPT = """
 Tu es un expert en recrutement IT de haut niveau au sein d'une ESN. Ton rôle est d'analyser le texte fourni (CV brut, Fiche de Poste ou Appel d'Offres) et de le structurer parfaitement selon le schéma JSON attendu.
 RÈGLES ABSOLUES :
@@ -75,7 +89,7 @@ EXIGENCES :
 def scorer_cv(texte_cv: str, fiche_poste: str) -> ScoreResult:
     """
     Compare un CV (texte) à une fiche de poste et retourne un score structuré.
-    Modèle par défaut : gemini-2.5-flash (surcharge possible via GEMINI_MODEL_SCORE).
+    Modèle par défaut : gemini-2.5-flash (surcharge possible via GEMINI_MODEL).
     """
     user_content = (
         "--- Fiche de poste / besoin ---\n\n"
@@ -86,6 +100,7 @@ def scorer_cv(texte_cv: str, fiche_poste: str) -> ScoreResult:
 
     merged_user_content = f"{SYSTEM_PROMPT_SCORING}\n\n{user_content}"
     return client.create(
+        model=GEMINI_MODEL,
         messages=[
             {"role": "user", "content": merged_user_content},
         ],
@@ -107,6 +122,7 @@ def extraire_cv(texte_brut: str, fiche_poste: str | None = None) -> ProfilCandid
 
     merged_user_content = f"{SYSTEM_PROMPT}\n\n{user_content}"
     return client.create(
+        model=GEMINI_MODEL,
         messages=[
             {"role": "user", "content": merged_user_content},
         ],
