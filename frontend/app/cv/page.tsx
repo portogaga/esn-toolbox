@@ -73,7 +73,7 @@ export default function CvGeneratorPage() {
   const [statusMessage, setStatusMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
-  const [templateType, setTemplateType] = useState<"detailed" | "simplified">(
+  const [templateType, setTemplateType] = useState<"detailed" | "simplified" | "valkima">(
     "detailed"
   );
 
@@ -355,7 +355,7 @@ export default function CvGeneratorPage() {
             <legend className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
               Modèle Word
             </legend>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-3">
               <button
                 type="button"
                 role="radio"
@@ -405,7 +405,51 @@ export default function CvGeneratorPage() {
                   <li>Résultats</li>
                 </ul>
               </button>
-
+                <button
+  type="button"
+  role="radio"
+  aria-checked={templateType === "valkima"}
+  onClick={() => setTemplateType("valkima")}
+  className={[
+    "relative flex w-full flex-col rounded-2xl border-2 p-5 text-left transition focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:ring-offset-2 focus:ring-offset-zinc-950",
+    templateType === "valkima"
+      ? "border-emerald-500 bg-emerald-50"
+      : "border-zinc-700 bg-zinc-900/40 hover:border-zinc-600",
+  ].join(" ")}
+>
+  {templateType === "valkima" && (
+    <CheckCircle2 className="absolute right-4 top-4 h-6 w-6 text-emerald-600" aria-hidden />
+  )}
+  <span
+    className={
+      templateType === "valkima"
+        ? "pr-10 text-base font-semibold text-zinc-900"
+        : "pr-2 text-base font-semibold text-zinc-100"
+    }
+  >
+    Format Valkima
+  </span>
+  <p
+    className={
+      templateType === "valkima"
+        ? "mt-2 text-sm text-zinc-700"
+        : "mt-2 text-sm text-zinc-400"
+    }
+  >
+    Charte Valkima pour AO (CNSS, etc.).
+  </p>
+  <ul
+    className={
+      templateType === "valkima"
+        ? "mt-4 list-inside list-disc space-y-1.5 text-sm text-zinc-800"
+        : "mt-4 list-inside list-disc space-y-1.5 text-sm text-zinc-500"
+    }
+  >
+    <li>Tableau profil</li>
+    <li>Expériences AO</li>
+    <li>Diplômes &amp; certifs</li>
+  </ul>
+</button>
               <button
                 type="button"
                 role="radio"
